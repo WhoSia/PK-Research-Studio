@@ -10,6 +10,7 @@ on:
       - 'scripts/**'
       - 'content/public/**'
       - 'atlas-utils.mjs'
+      - 'rival-model.mjs'
       - 'workspace.js'
       - 'workspace.css'
       - 'index.html'
