@@ -36,6 +36,21 @@ Run `node --test tests/*.test.cjs` and
 the human maintainer must perform all commits, PR merges and deployments.
 Feature branches are deleted **manually** after merging; do not add automated cleanup.
 
+## Rival-Model Atlas — public navigation, not new publication
+The read-only `rival-model.mjs` maps four research questions to **existing approved**
+derivative records. The interface compares five separately attributed lanes:
+(1) source text withheld pending author-approved publication,
+(2) curator's published interpretation,
+(3) limited external-literature reading notes,
+(4) previously published objections or negative countermodels,
+(5) related research-record chronology and source revision identifiers.
+This fifth lane is **not** a verified paragraph-by-paragraph edit audit.
+Links fail closed if their approved records are missing or reclassified.
+The existing public manifest and all private source/participant material are unchanged.
+
+Regression: `node --test tests/*.test.cjs`, `node scripts/validate-public-records.cjs`.
+Do not claim experiments executed or conclude Park's viewpoint from the derivative model.
+
 ## Run locally
 
 Run `node scripts/serve.cjs` and open `http://127.0.0.1:4173`. ES modules require HTTP rather than a `file://` URL. Production uses a Vercel function at `/api/notion-sync`. The browser UI has no npm build dependency.

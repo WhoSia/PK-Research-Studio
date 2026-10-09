@@ -21,6 +21,7 @@ test('local HTTP exposes the approved source atlas but not server/private code',
       ['/','text/html','id="reading-trails"'],
       ['/workspace.js','text/javascript','filterResearchRecords'],
       ['/atlas-utils.mjs','text/javascript','readingDepth'],
+      ['/rival-model.mjs','text/javascript','rivalCase'],
       ['/content/public/records.json','application/json','schema_version']
     ]){
       const response=await fetch(base+url);
