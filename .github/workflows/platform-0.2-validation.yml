@@ -2,13 +2,17 @@ name: Platform 0.2 read-only validation
 on:
   push:
     branches:
-      - platform-0.2-approval-date-hardening
+      - main
   pull_request:
     paths:
       - 'lib/**'
       - 'tests/**'
       - 'scripts/**'
       - 'content/public/**'
+      - 'atlas-utils.mjs'
+      - 'workspace.js'
+      - 'workspace.css'
+      - 'index.html'
       - '.github/workflows/platform-0.2-validation.yml'
   workflow_dispatch:
 permissions:
