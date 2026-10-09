@@ -1,6 +1,10 @@
 # P&K Research Studio
 
-An interactive research atlas for the P&K Platform 0.1. [Research OS Platform brief](https://app.notion.com/p/3f4ef561cf9281009b84dfa045de9678).
+An interactive research atlas for the P&K Platform 0.2 security release. [Research OS Platform brief](https://app.notion.com/p/3f4ef561cf9281009b84dfa045de9678).
+
+## Platform 0.2 status
+
+The release adds fail-closed source-publication consent/version checks and a live Supabase publication-approval trigger. Unit/Notion/curated-record validation and synthetic role tests have passed; real Park/reviewer account acceptance and B0–B6 simulation remain HOLD. The scientific head remains G2.21 Semantic Preseal. Read [Platform 0.2 custody contract](docs/platform-0.2-custody-contract.md) before extending the publishing path.
 
 ## What works
 
