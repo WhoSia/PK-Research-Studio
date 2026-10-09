@@ -9,6 +9,8 @@ An interactive research atlas for the P&K Platform 0.1. [Research OS Platform br
 - B0–B6 branch specification explorer and prospective configuration download. **No simulation result is claimed.**
 - Email magic-link participant desk, gated by an administrator-maintained invite list. RLS restricts feedback to its author and reviewers.
 
+The live deployment is at [pk-research-studio.vercel.app](https://pk-research-studio.vercel.app). Vercel's GitHub login connection is not set up, so commits require an explicit deployment step. Participant addresses and a positive feedback submission test are pending.
+
 ## Run locally
 
 Serve the repository root with any static HTTP server and open `index.html`. ES modules require HTTP rather than a `file://` URL. There are no npm dependencies or build steps.

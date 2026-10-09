@@ -2,35 +2,35 @@ import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from './config.js';
 
 const PRESEAL = 'https://app.notion.com/p/3f4ef561cf9281a08752db1731b23788';
 const nodes = [
-  { id:'memory', ko:'기억', en:'MEMORY', x:190,y:160, note:'현재 접근할 수 없는 기억도 자아와 어떤 관계를 맺는가. 원문에 대한 해석에서 파생된 탐색 축입니다.', question:'소유와 현재 접근은 같은 조건인가?' },
-  { id:'perspective', ko:'관점', en:'PERSPECTIVE', x:440,y:120, note:'같은 사건의 경계와 의미가 관점에 따라 달라질 수 있다는 파생적 구성입니다.', question:'관점이 달라도 남는 세계 저항은 무엇인가?' },
-  { id:'event', ko:'사건', en:'EVENT', x:680,y:210, note:'사건을 어디서 나누는지에 대한 G2.19의 연구적 문제를 표시합니다.', question:'경계의 선택은 관찰자에게만 달렸는가?' },
-  { id:'timeline', ko:'시간선', en:'TIMELINE', x:720,y:435, note:'시간의 방향과 회고적 재분류를 연결하는 파생 개념입니다.', question:'나중의 기술이 이전 사건을 어떻게 바꾸는가?' },
-  { id:'freedom', ko:'자유성', en:'FREEDOM', x:470,y:485, note:'정의 가능성과 절대성 사이의 긴장을 시험하기 위한 개념적 축입니다.', question:'정의하지 못한 것을 곧 자유롭다고 할 수 있는가?' },
-  { id:'absolute', ko:'절대성', en:'ABSOLUTE', x:245,y:435, note:'G2.21의 자기 적용 규칙과 별도 부여된 절대 전제 사이의 조건부 충돌을 가리킵니다.', question:'규칙이 자기 자신에게 적용되는가?' },
-  { id:'existence', ko:'실존', en:'EXISTENCE', x:78,y:320, note:'원문을 단정하지 않고, 개념의 대상과 모델의 범위를 묻는 탐색 지점입니다.', question:'모델의 안정성이 실존에 관해 무엇을 말하는가?' },
-  { id:'self', ko:'자아', en:'SELF', x:450,y:305, note:'기억·관점·사건·시간 관계가 만나는 질문의 중심입니다. 하나의 확정된 실체라는 결론은 제시하지 않습니다.', question:'서로 다른 관계의 겹침을 어떻게 기술할 것인가?' }
+  { id:'memory', ko:'기억', en:'MEMORY', x:190,y:160, note:'지금 떠올릴 수 없는 기억도 자아와 관계가 남는지 묻습니다.', question:'기억이 떠오르지 않아도 내 기억이라고 할 수 있을까요?' },
+  { id:'perspective', ko:'관점', en:'PERSPECTIVE', x:440,y:120, note:'보는 위치가 달라지면 같은 사건을 나누는 방식도 달라질 수 있습니다.', question:'관점이 바뀌어도 그대로 남는 것은 무엇일까요?' },
+  { id:'event', ko:'사건', en:'EVENT', x:680,y:210, note:'어디부터 어디까지를 한 사건으로 볼지 묻는 G2.19의 주제입니다.', question:'사건의 경계는 누가 정할까요?' },
+  { id:'timeline', ko:'시간선', en:'TIMELINE', x:720,y:435, note:'시간이 흐른 뒤 과거 사건을 다시 설명할 때 생기는 변화를 살펴봅니다.', question:'나중의 설명이 과거 사건의 의미를 바꿀까요?' },
+  { id:'freedom', ko:'자유성', en:'FREEDOM', x:470,y:485, note:'정의할 수 있는 것과 절대적이라고 부르는 것 사이의 관계를 살펴봅니다.', question:'정의하기 어렵다는 이유만으로 자유롭다고 할 수 있을까요?' },
+  { id:'absolute', ko:'절대성', en:'ABSOLUTE', x:245,y:435, note:'G2.21에서는 규칙을 그 규칙 자신에게 적용했을 때의 충돌을 따로 다룹니다.', question:'규칙이 자기 자신에게도 적용될까요?' },
+  { id:'existence', ko:'실존', en:'EXISTENCE', x:78,y:320, note:'형식 모델이 실제 존재에 대해 어디까지 말할 수 있는지 묻습니다.', question:'모델이 안정적이면 존재에 대한 결론도 나올까요?' },
+  { id:'self', ko:'자아', en:'SELF', x:450,y:305, note:'기억, 관점, 사건, 시간의 관계가 모이는 질문입니다. 자아가 무엇인지는 여기서 확정하지 않습니다.', question:'이 관계들이 달라져도 같은 자아라고 할 수 있을까요?' }
 ];
 const edges = [
-  {a:'memory',b:'self',type:'관계 가설',note:'기억의 접근 가능성과 자기 관계의 지속을 비교합니다.',view:'relations'},
-  {a:'perspective',b:'self',type:'관계 가설',note:'자아의 기술은 관점의 이동에 따라 재구성될 수 있습니다.',view:'relations'},
-  {a:'event',b:'self',type:'경계 문제',note:'사건 경계의 선택이 자기 서술에 미치는 영향을 탐색합니다.',view:'relations'},
-  {a:'timeline',b:'event',type:'시간 관계',note:'이후의 기술이 이전 사건의 분류와 만나는 지점입니다.',view:'relations'},
-  {a:'freedom',b:'absolute',type:'긴장',note:'정의, 자유, 절대성의 관계는 아직 해석 문제입니다.',view:'tensions'},
-  {a:'absolute',b:'self',type:'자기 적용',note:'G2.21은 규칙의 자기 적용과 외부 절대 전제를 분리해 다룹니다.',view:'tensions'},
-  {a:'existence',b:'self',type:'권한 경계',note:'형식 모델에서 실존론적 결론으로의 비약을 보류합니다.',view:'tensions'},
-  {a:'memory',b:'timeline',type:'계보',note:'잊힌 상태와 시간적 연속성 사이의 비교입니다.',view:'lineage'},
-  {a:'perspective',b:'event',type:'계보',note:'관점과 사건 경계의 연구적 연결입니다.',view:'lineage'},
-  {a:'event',b:'absolute',type:'계보',note:'G2.19의 사건 연구에서 G2.21의 규칙 Preseal로 이어지는 질문입니다.',view:'lineage'}
+  {a:'memory',b:'self',type:'관계 가설',note:'기억에 접근하지 못할 때도 자아와의 관계가 남는지 묻습니다.',view:'relations'},
+  {a:'perspective',b:'self',type:'관계 가설',note:'관점이 달라지면 자아를 설명하는 방식도 달라질 수 있습니다.',view:'relations'},
+  {a:'event',b:'self',type:'경계 문제',note:'사건을 어디서 나누느냐에 따라 자기 이야기가 달라지는지 살펴봅니다.',view:'relations'},
+  {a:'timeline',b:'event',type:'시간 관계',note:'지금의 설명이 과거 사건의 분류에 영향을 주는지 묻습니다.',view:'relations'},
+  {a:'freedom',b:'absolute',type:'긴장',note:'자유와 절대성의 관계는 아직 정리되지 않았습니다.',view:'tensions'},
+  {a:'absolute',b:'self',type:'자기 적용',note:'G2.21은 규칙의 자기 적용과 별도로 둔 절대 전제를 구분합니다.',view:'tensions'},
+  {a:'existence',b:'self',type:'권한 경계',note:'형식 모델만으로 실존에 관한 결론을 낼 수는 없습니다.',view:'tensions'},
+  {a:'memory',b:'timeline',type:'계보',note:'잊힌 기억과 시간에 따른 자기 관계를 함께 살펴봅니다.',view:'lineage'},
+  {a:'perspective',b:'event',type:'계보',note:'G2.19에서 관점과 사건 경계를 함께 다뤘습니다.',view:'lineage'},
+  {a:'event',b:'absolute',type:'계보',note:'G2.19의 사건 연구와 G2.21의 규칙 검토를 잇는 질문입니다.',view:'lineage'}
 ];
 const branches = [
-  ['B0','기준선','절대 전제를 부여하지 않은 기준 분기. 충돌이 전제에 의존하는지 비교합니다.'],
-  ['B1','고정 규칙 · 무수리','문자 그대로 고정된 규칙을 유지하고 수리 작업을 하지 않습니다.'],
-  ['B2','고정 규칙 · 구조 변형','고정 규칙을 유지하면서 문맥 또는 아키텍처 변형을 허용합니다.'],
-  ['B3','보상 규칙 추가','고정 규칙을 유지하면서 제한된 보조 규칙의 추가를 허용합니다.'],
-  ['B4','이동하는 보유자','어떤 절대적 약속이 남는다는 메타 불변량을 둡니다. 문자 규칙의 실효적 철회는 위반으로 기록합니다.'],
-  ['B5','병렬 보존','B1–B4를 병렬로 보존하며 임의로 하나의 결론으로 합치지 않습니다.'],
-  ['B6','외래 입력','B5에 기하 경계 g, 무관한 아카이브 표지 h, 관련 없는 이름표 j를 추가합니다.']
+  ['B0','기준선','절대 전제를 넣지 않습니다. 다른 분기에서 생기는 충돌과 비교하기 위한 기준입니다.'],
+  ['B1','고정 규칙 · 수리 없음','규칙을 그대로 두고 충돌을 고치지 않습니다.'],
+  ['B2','고정 규칙 · 구조 변경','규칙은 유지하되 문맥이나 구조를 바꿀 수 있습니다.'],
+  ['B3','보조 규칙 추가','규칙을 유지하면서 보조 규칙을 더할 수 있습니다.'],
+  ['B4','절대 약속의 대상 변경','절대적 약속은 남기되 그 대상을 바꿀 수 있습니다. 원래 규칙을 사실상 철회하면 위반으로 기록합니다.'],
+  ['B5','분기 병렬 보존','B1–B4를 함께 보되 하나의 결과로 합치지 않습니다.'],
+  ['B6','외래 입력 추가','B5에 기하 경계 g, 무관한 기록 표지 h, 이름표 j를 추가합니다.']
 ];
 let graphView='relations', selected=[], activeEdge=null, branchIndex=0, member=null, session=null;
 const $=id=>document.getElementById(id);
@@ -47,11 +47,11 @@ function renderGraph(){
   $('graph-list').innerHTML=nodes.map(n=>`<button data-index-node="${n.id}">${n.ko}</button>`).join('');
   $('graph-list').querySelectorAll('button').forEach(el=>el.addEventListener('click',()=>selectNode(el.dataset.indexNode)));
 }
-function selectNode(id){const n=nodes.find(x=>x.id===id);activeEdge=null;selected=selected.filter(x=>x!==id);selected.push(id);if(selected.length>2)selected.shift();$('inspector').innerHTML=`<h3>${n.ko}</h3><p class="inspector-kicker">${n.en} / ACTIVE DERIVATIVE</p><p>${n.note}</p><p><strong>열린 질문</strong><br>${n.question}</p><p class="inspector-provenance">이 항목은 원문 인용이 아닌 연구용 개념 지도입니다.</p><a class="inspector-link" href="${PRESEAL}" target="_blank" rel="noopener noreferrer">관련 Preseal 기록 ↗</a>`;updateCompare();renderGraph()}
-function selectEdge(e){activeEdge=edges.indexOf(e);const a=nodes.find(n=>n.id===e.a),b=nodes.find(n=>n.id===e.b);$('inspector').innerHTML=`<h3>${a.ko} ↔ ${b.ko}</h3><p class="inspector-kicker">${e.type} / ACTIVE DERIVATIVE</p><p>${e.note}</p><p class="inspector-provenance">관계선은 검토 가능한 파생 가설입니다. 원문에 대한 동의나 실험 결과를 뜻하지 않습니다.</p><a class="inspector-link" href="${PRESEAL}" target="_blank" rel="noopener noreferrer">관련 연구 기록 ↗</a>`;renderGraph()}
+function selectNode(id){const n=nodes.find(x=>x.id===id);activeEdge=null;selected=selected.filter(x=>x!==id);selected.push(id);if(selected.length>2)selected.shift();$('inspector').innerHTML=`<h3>${n.ko}</h3><p class="inspector-kicker">${n.en} / ACTIVE DERIVATIVE</p><p>${n.note}</p><p><strong>남은 질문</strong><br>${n.question}</p><p class="inspector-provenance">연구진의 해석입니다. 성준의 원문 인용은 아닙니다.</p><a class="inspector-link" href="${PRESEAL}" target="_blank" rel="noopener noreferrer">관련 연구 기록 ↗</a>`;updateCompare();renderGraph()}
+function selectEdge(e){activeEdge=edges.indexOf(e);const a=nodes.find(n=>n.id===e.a),b=nodes.find(n=>n.id===e.b);$('inspector').innerHTML=`<h3>${a.ko} ↔ ${b.ko}</h3><p class="inspector-kicker">${e.type} / ACTIVE DERIVATIVE</p><p>${e.note}</p><p class="inspector-provenance">이 연결은 연구진의 가설입니다. 성준의 동의나 실험 결과를 뜻하지 않습니다.</p><a class="inspector-link" href="${PRESEAL}" target="_blank" rel="noopener noreferrer">관련 연구 기록 ↗</a>`;renderGraph()}
 function updateCompare(){const c=$('compare-content');if(selected.length<2){c.textContent='두 개념을 차례로 선택하세요.';return}const [a,b]=selected.map(id=>nodes.find(n=>n.id===id));c.innerHTML=`<strong>${a.ko} ↔ ${b.ko}</strong><p>${a.question}<br>${b.question}</p>`}
 document.querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{graphView=b.dataset.view;activeEdge=null;document.querySelectorAll('.seg').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});renderGraph()}));
-$('reset-graph').addEventListener('click',()=>{selected=[];activeEdge=null;$('inspector').innerHTML='<p class="inspector-placeholder">지도의 점이나 선을 선택하면<br>관계의 설명과 연구 상태가 표시됩니다.</p>';updateCompare();renderGraph()});
+$('reset-graph').addEventListener('click',()=>{selected=[];activeEdge=null;$('inspector').innerHTML='<p class="inspector-placeholder">개념이나 연결선을 선택하세요.</p>';updateCompare();renderGraph()});
 renderGraph();
 
 function renderBranches(){ $('branch-tabs').innerHTML=branches.map((b,i)=>`<button class="branch-button${i===branchIndex?' active':''}" data-branch="${i}" aria-pressed="${i===branchIndex}">${b[0]} <span>${b[1]}</span></button>`).join('');$('branch-tabs').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{branchIndex=Number(b.dataset.branch);renderBranches()}));const b=branches[branchIndex];$('branch-id').textContent=b[0];$('branch-title').textContent=b[1];$('branch-description').textContent=b[2]}
@@ -63,7 +63,7 @@ function setStatus(message){authStatus.textContent=message}
 function saveSession(value){session=value;if(value)sessionStorage.setItem('pk_session',JSON.stringify(value));else sessionStorage.removeItem('pk_session')}
 async function api(path,{method='GET',body=null,token=null,headers={}}={}){const r=await fetch(`${SUPABASE_URL}${path}`,{method,headers:{apikey:SUPABASE_PUBLISHABLE_KEY,...(token?{Authorization:`Bearer ${token}`}:{}) ,...(body?{'Content-Type':'application/json'}:{}),...headers},body:body?JSON.stringify(body):undefined});const raw=await r.text();let data;try{data=raw?JSON.parse(raw):null}catch{data=raw}if(!r.ok)throw new Error(data?.msg||data?.message||data?.error_description||`요청 오류 (${r.status})`);return data}
 async function activeToken(){if(!session)return null;if(session.expires_at&&Date.now()/1000>session.expires_at-60){try{const s=await api('/auth/v1/token?grant_type=refresh_token',{method:'POST',body:{refresh_token:session.refresh_token}});saveSession({...s,expires_at:Math.floor(Date.now()/1000)+s.expires_in})}catch{saveSession(null);return null}}return session.access_token}
-async function loadDesk(){authForm.hidden=false;feedbackForm.hidden=true;history.hidden=true;$('logout').hidden=true;let token=await activeToken();if(!token){setStatus('로그인하면 비공개 의견을 제출하고 자신의 제출 기록을 볼 수 있습니다.');return}try{const user=await api('/auth/v1/user',{token});const rows=await api(`/rest/v1/app_members?select=user_id,role&user_id=eq.${encodeURIComponent(user.id)}&limit=1`,{token});member=rows?.[0]||null;$('logout').hidden=false;if(!member){setStatus('로그인되었습니다. 연구 참여 허용 목록 등록을 기다리고 있습니다.');authForm.hidden=true;return}setStatus(`${user.email} · ${member.role==='reviewer'?'검토자':'참여자'}로 로그인되었습니다.`);authForm.hidden=true;feedbackForm.hidden=false;history.hidden=false;$('member-role').textContent=member.role==='reviewer'?'REVIEWER':'PARTICIPANT';await loadFeedback(user.id,token)}catch(e){setStatus(`접근을 확인하지 못했습니다: ${e.message}`);authForm.hidden=false}}
+async function loadDesk(){authForm.hidden=false;feedbackForm.hidden=true;history.hidden=true;$('logout').hidden=true;let token=await activeToken();if(!token){setStatus('초대받은 계정으로 로그인하면 의견을 남길 수 있습니다.');return}try{const user=await api('/auth/v1/user',{token});const rows=await api(`/rest/v1/app_members?select=user_id,role&user_id=eq.${encodeURIComponent(user.id)}&limit=1`,{token});member=rows?.[0]||null;$('logout').hidden=false;if(!member){setStatus('로그인됐습니다. 아직 참여 권한은 등록되지 않았습니다.');authForm.hidden=true;return}setStatus(`${user.email} · ${member.role==='reviewer'?'검토자':'참여자'} 로그인`);authForm.hidden=true;feedbackForm.hidden=false;history.hidden=false;$('member-role').textContent=member.role==='reviewer'?'REVIEWER':'PARTICIPANT';await loadFeedback(user.id,token)}catch(e){setStatus(`접근을 확인하지 못했습니다: ${e.message}`);authForm.hidden=false}}
 async function loadFeedback(userId,token){try{const reviewer=member?.role==='reviewer';$('feedback-history').querySelector('h3').textContent=reviewer?'검토 대기열':'내 제출 기록';const filter=reviewer?'':`&author_uid=eq.${encodeURIComponent(userId)}`;const rows=await api(`/rest/v1/feedback?select=id,kind,body,status,created_at,author_uid,target_ref${filter}&order=created_at.desc&limit=50`,{token});const list=$('feedback-list');list.replaceChildren();if(!rows.length){const li=document.createElement('li');li.textContent='제출된 의견이 없습니다.';list.append(li);return}for(const item of rows){const li=document.createElement('li'),tag=document.createElement('b'),p=document.createElement('p');tag.textContent=`${item.status} · ${new Date(item.created_at).toLocaleString('ko-KR')}${reviewer&&item.author_uid!==userId?' · 다른 참여자':''}`;p.textContent=`${item.kind}${item.target_ref?' / '+item.target_ref:''}\n${item.body}`;li.append(tag,p);if(reviewer){const select=document.createElement('select');select.setAttribute('aria-label','검토 상태 변경');for(const status of ['SUBMITTED FEEDBACK','UNDER REVIEW','REVIEWED']){const option=document.createElement('option');option.value=status;option.textContent=status;option.selected=item.status===status;select.append(option)}select.addEventListener('change',async()=>{try{await api(`/rest/v1/feedback?id=eq.${encodeURIComponent(item.id)}`,{method:'PATCH',token,headers:{Prefer:'return=minimal'},body:{status:select.value}});await loadFeedback(userId,token)}catch(e){$('feedback-message').textContent=`상태 변경 실패: ${e.message}`}});li.append(select)}list.append(li)}}catch(e){$('feedback-list').textContent=`기록을 읽지 못했습니다: ${e.message}`}}
 authForm.addEventListener('submit',async e=>{e.preventDefault();const email=$('email').value.trim();if(!email)return;try{await api('/auth/v1/otp',{method:'POST',body:{email,create_user:true},headers:{'Redirect-To':location.origin+location.pathname}});setStatus('로그인 링크를 보냈습니다. 메일의 링크를 열어주세요.')}catch(err){setStatus(`로그인 링크를 보내지 못했습니다: ${err.message}`)}});
 $('logout').addEventListener('click',async()=>{const token=await activeToken();if(token)try{await api('/auth/v1/logout',{method:'POST',token})}catch{}saveSession(null);member=null;await loadDesk()});

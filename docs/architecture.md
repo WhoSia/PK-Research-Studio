@@ -3,13 +3,13 @@
 ## Delivery
 
 - Source: `WhoSia/PK-Research-Studio`, static HTML/CSS/ES module. No build dependency or GitHub Actions workflow.
-- Hosting: Vercel static project connected to this repository.
+- Hosting: Vercel static project. The first production deployment used the exact files from Git commit `451b1be` through the Vercel API. Vercel's GitHub connection was unavailable, so future pushes do not deploy automatically; deploy each reviewed commit explicitly until the owner connects GitHub in Vercel.
 - Identity and durable feedback: a dedicated Supabase Auth/Postgres project in Seoul. The browser uses only its publishable key. Database RLS is the authorization boundary.
 - Research source of record: P&K Research OS in Notion. The public site carries curated stage metadata and derivative descriptions, not private raw source bytes.
 
 ## Access model
 
-Anonymous visitors read the public observatory, concept map, and branch specification. Email magic-link login creates a Supabase user, but an account alone grants no research access. An administrator adds participant or reviewer emails to `private.invites` outside Git. A database trigger enrolls invited new users; existing users can be added with the documented backfill query. A participant may submit and read only their own feedback. A reviewer may read all feedback and update only its review status. Neither role can edit source material or mark feedback canonical.
+Anonymous visitors read the public observatory, concept map, and branch specification. Email magic-link login creates a Supabase user, but an account alone grants no research access. An administrator adds participant or reviewer emails to `private.invites` outside Git. A database trigger enrolls invited new users; existing users can be added with the documented backfill query. A participant may submit and read only their own feedback. A reviewer may read all feedback and update only its review status. Neither role can edit source material or mark feedback canonical. No invite addresses have been provisioned yet at the owner's request, so the positive submission path remains unverified.
 
 Feedback has an immutable author, body, target, consent flag, and creation timestamp. A reviewer status change only tracks triage. Any later source archive or Research OS update requires a separate human-controlled process.
 
