@@ -82,7 +82,7 @@ async function run(){
     await participantView.page.getByRole('button',{name:/기억을 잊어도 내 기억일까/}).click();
     await participantView.page.locator('#answer-editor').fill('지금 접근할 수 없어도 내 경험이라는 관계가 남는다고 생각합니다.');
     await participantView.page.getByRole('button',{name:'답변 저장'}).click();
-    await participantView.page.getByRole('button',{name:'성준의 답변 모아 읽기'}).click();
+    await participantView.page.getByRole('button',{name:'박성준의 답변 모아 읽기'}).click();
     await participantView.page.locator('#question-list .answer-body').getByText('지금 접근할 수 없어도 내 경험이라는 관계가 남는다고 생각합니다.').waitFor();
     assert.equal(state.answers.length,1);
     await participantView.page.getByRole('button',{name:'질문과 수정 이력 보기'}).click();

@@ -30,7 +30,7 @@ export function createWorkspace({api,activeToken,getMember}) {
       for(const a of answers){const q=questions.find(q=>q.id===a.question_id),article=el('article',undefined,'answer-sheet');article.append(el('span',`${date(a.created_at)} · 수정 ${a.revision} · 검토 전`,'micro'),el('h3',q.title),el('p',q.body,'question-context'),el('p',a.body,'answer-body'),button('질문과 수정 이력 보기 →',()=>openQuestion(q.id)));list.append(article);}
       for(const r of sourceRecords){const article=el('article',undefined,'answer-sheet');article.append(el('span','원문 보관 문서 · '+date(r.imported_at),'micro'),el('h3',r.title));const body=el('div',undefined,'archived-answer');renderText(body,r.body);article.append(body,button('출처와 버전 보기 →',()=>openRecord(r.id)));list.append(article);}
     } else {
-      if(!rows.length)list.append(el('p',questions.length?'조건에 맞는 질문이 없습니다.':'아직 올라온 질문이 없습니다. 우준 님이 첫 질문을 올리면 여기서 답변을 이어갑니다.','empty-note'));
+      if(!rows.length)list.append(el('p',questions.length?'조건에 맞는 질문이 없습니다.':'아직 올라온 질문이 없습니다. 김우준 님이 첫 질문을 올리면 여기서 답변을 이어갑니다.','empty-note'));
       for(const q of rows){const b=button('',()=>openQuestion(q.id),'question-row');b.append(el('span',answered.has(q.id)?'답변 있음':'답변 기다리는 중','micro'),el('strong',q.title),el('span',`${q.concept||'자유 질문'} · ${date(q.created_at)}`,'row-meta'),el('span','↗','row-arrow'));list.append(b);}
     }
     $('question-count').textContent=mode==='answers'?`${list.querySelectorAll('.answer-sheet').length}개의 읽을거리`:`${questions.length}개의 질문`;
@@ -50,7 +50,7 @@ export function createWorkspace({api,activeToken,getMember}) {
       const own=answers.find(a=>a.author_uid===member().user_id),form=el('form',undefined,'workspace-form');
       const label=el('label',own?'답변 고치기':'내 답변');label.htmlFor='answer-editor';const input=el('textarea');input.id='answer-editor';input.rows=9;input.required=true;input.maxLength=24000;input.value=own?.body||'';input.placeholder='생각을 그대로 적어주세요. 나중에 고쳐도 이전 답변은 남습니다.';input.addEventListener('input',()=>draftDirty=true);
       const submit=el('button','답변 저장','submit-button');submit.type='submit';const status=el('p');status.setAttribute('role','status');
-      form.append(label,input,el('small','저장하면 연구 참여자가 읽을 수 있습니다. 공개 여부는 우준 님이 따로 정합니다.'),submit,status);
+      form.append(label,input,el('small','저장하면 연구 참여자가 읽을 수 있습니다. 공개 여부는 김우준 님이 따로 정합니다.'),submit,status);
       form.addEventListener('submit',async e=>{e.preventDefault();if(!input.value.trim())return;submit.disabled=true;try{await request('answer_revisions',{method:'POST',body:{question_id:id,author_uid:member().user_id,revision:(own?.revision||0)+1,body:input.value.trim()}});draftDirty=false;await loadPrivate();openQuestion(id);notice('답변을 저장했습니다.');}catch(err){status.textContent='저장하지 못했습니다. 작성한 내용은 이 칸에 남아 있습니다. '+err.message;}finally{submit.disabled=false;}});panel.append(form);
     }
     $('question-list').hidden=true;panel.focus();
@@ -89,7 +89,7 @@ export function createWorkspace({api,activeToken,getMember}) {
   }
   function openRecord(id){
     const r=records.find(x=>x.id===id);if(!r)return;const dialog=$('record-reader');$('reader-title').textContent=r.title;const content=$('reader-content');content.replaceChildren();content.append(el('p',`${recordType(r)} · ${labels[r.provenance]} · ${date(r.imported_at)}`,'detail-meta'));
-    if(r.bibliography){const b=r.bibliography,card=el('section',undefined,'bibliography-card');card.append(el('h3','논문·자료 정보'));const dl=el('dl');for(const [label,value] of [['저자 · 연도',`${b.author} · ${b.year}`],['원제',b.exact_title],['DOI',b.doi||'확인 전'],['판본',b.version],['읽은 범위',b.read_status],['원문 주장',b.original_claim],['우리 해석',b.our_interpretation],['성준의 발언과의 관계',b.park_relation],['한계',b.limitations],['재배포',b.license]]){dl.append(el('dt',label),el('dd',value));}card.append(dl);content.append(card);}renderText(content,r.body);
+    if(r.bibliography){const b=r.bibliography,card=el('section',undefined,'bibliography-card');card.append(el('h3','논문·자료 정보'));const dl=el('dl');for(const [label,value] of [['저자 · 연도',`${b.author} · ${b.year}`],['원제',b.exact_title],['DOI',b.doi||'확인 전'],['판본',b.version],['읽은 범위',b.read_status],['원문 주장',b.original_claim],['우리 해석',b.our_interpretation],['박성준의 발언과의 관계',b.park_relation],['한계',b.limitations],['재배포',b.license]]){dl.append(el('dt',label),el('dd',value));}card.append(dl);content.append(card);}renderText(content,r.body);
     const custody=el('details'),summary=el('summary','출처와 버전');custody.append(summary,el('p',`분류: ${r.provenance}`),el('p',`출처 버전: ${r.source_revision}`),el('p',`이 화면 본문 SHA-256: ${r.content_hash}`,'hash'));if(r.source_url){const source=el('a','Notion의 근거 기록 ↗');source.href=r.source_url;source.target='_blank';source.rel='noopener noreferrer';custody.append(source);}const raw=el('details');raw.append(el('summary','이 화면의 텍스트 보기'),el('pre',r.body,'source-code'));custody.append(raw);content.append(custody);
     const actions=$('reader-actions');actions.replaceChildren();if(member()?.role==='reviewer'){
       actions.append(el('p',publicRecords.some(p=>p.id===r.id)?'GitHub에 공개된 버전입니다.':'공개할 버전은 검토 후 GitHub의 공개 기록 파일에 반영합니다.','detail-meta'));
@@ -110,6 +110,6 @@ export function createWorkspace({api,activeToken,getMember}) {
   return {
     async refresh(){const ticket=++generation;$('question-detail').hidden=true;$('question-list').hidden=false;questions=[];replies=[];records=[];publicRecords=[];if($('record-reader').open)$('record-reader').close();$('reader-content').replaceChildren();$('reader-actions').replaceChildren();$('question-detail').replaceChildren();renderQuestions();renderRecords();$('new-question-toggle').hidden=member()?.role!=='reviewer';$('new-question-form').hidden=true;$('notion-import').hidden=member()?.role!=='reviewer';try{await loadPrivate();if(ticket!==generation)return;renderQuestions();await loadRecords();}catch(e){if(ticket===generation)notice('기록을 불러오지 못했습니다. 새로고침해 다시 시도해 주세요. '+e.message);}},
     findRecords:workspaceSearch,
-    askAbout(concept){$('question-concept').value=concept;location.hash='questions';if(member()?.role==='reviewer'){$('new-question-form').hidden=false;$('question-title').focus();}else notice('질문 작성은 우준 님 계정에서 할 수 있습니다. 성준 님은 올라온 질문에 답변을 남길 수 있습니다.');}
+    askAbout(concept){$('question-concept').value=concept;location.hash='questions';if(member()?.role==='reviewer'){$('new-question-form').hidden=false;$('question-title').focus();}else notice('질문 작성은 김우준 님 계정에서 할 수 있습니다. 박성준 님은 올라온 질문에 답변을 남길 수 있습니다.');}
   };
 }

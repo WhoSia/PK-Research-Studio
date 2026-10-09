@@ -11,7 +11,7 @@ const entries = [
     source_id: '3c7ef561-cf92-813e-a46f-e26ab1a7ace1', revision: '2026-08-25T06:47:45.236Z',
     title: '연구 계보 I · 조화, 규정, 잔여', concept: '조화 규정 잔여 관계',
     body: `## 어디서 시작했나
-성준의 질문은 조화가 서로 다른 현실을 만들 수 있는지, 비판에서 생긴 조화도 다시 비판받을 수 있는지에 닿아 있었다. 아래 정리는 연구진의 해석이다.
+박성준의 질문은 조화가 서로 다른 현실을 만들 수 있는지, 비판에서 생긴 조화도 다시 비판받을 수 있는지에 닿아 있었다. 아래 정리는 연구진의 해석이다.
 ## 지금 남은 생각
 고정된 규칙 자체가 문제라는 결론은 나오지 않았다. 한 규칙이 자기 범위를 넘어 모든 것을 끝까지 설명한다고 주장할 때 문제가 생긴다. ‘잔여’도 영원히 남는 어떤 물건이 아니라, 특정 규정과의 관계에서 생기는 자리로 다룬다.
 ## 아직 열린 부분
@@ -26,7 +26,7 @@ const entries = [
 ## ‘가위’가 자르는 것
 기억이나 서사를 자르는 일과 과거의 사건 자체를 없애는 일은 다르다. 연구 기록은 기억, 인과적 영향, 시간 순서, 자르는 절차의 역사까지 네 층을 구분한다.
 ## 해석의 한계
-성준의 ‘양자성’은 철학적 작업 용어다. 양자물리학의 주장으로 읽지 않는다. 여기서 자아의 실체가 발견된 것도 아니다.`
+박성준의 ‘양자성’은 철학적 작업 용어다. 양자물리학의 주장으로 읽지 않는다. 여기서 자아의 실체가 발견된 것도 아니다.`
   },
   {
     id: 'lineage-3-self-description',
@@ -55,7 +55,7 @@ const entries = [
     source_id: '3f4ef561-cf92-81a0-8752-db1731b23788', revision: '2026-10-09T17:22:01.078Z',
     title: 'G2.21 · 절대 규칙과 모순을 시험하기 전', concept: 'G2.21 절대성 자유성 규칙 모순 시뮬레이션',
     body: `## 무엇을 준비했나
-연구진은 성준의 발언에서 출발해 규칙이 자기 자신에도 적용되는 경우와 그렇지 않은 경우를 나누었다. B0부터 B6까지의 분기는 규칙을 그대로 두거나, 구조를 바꾸거나, 보조 규칙을 더하거나, 여러 해석을 병렬로 두는 식으로 비교한다. 분기와 공식은 성준의 원문이 아니라 연구진의 형식화다.
+연구진은 박성준의 발언에서 출발해 규칙이 자기 자신에도 적용되는 경우와 그렇지 않은 경우를 나누었다. B0부터 B6까지의 분기는 규칙을 그대로 두거나, 구조를 바꾸거나, 보조 규칙을 더하거나, 여러 해석을 병렬로 두는 식으로 비교한다. 분기와 공식은 박성준의 원문이 아니라 연구진의 형식화다.
 ## 왜 아직 결과가 없나
 자기 적용 조건에서 생기는 충돌은 모형에 넣은 전제에서 따라온다. 세계에 대한 발견으로 발표할 수 없다. 실행 코드, 해시, 입력과 검증 절차도 아직 고정되지 않았다.
 ## 현재 상태
@@ -77,7 +77,7 @@ G2.21의 자기 적용 충돌은 정의와 전제를 함께 넣으면 곧바로 
     body: `## 읽은 범위
 연구 기록에는 원본 PDF를 열어 앞부분을 확인한 것으로 적혀 있다. 개인 동일성이 언제나 결정적인 답을 가져야 하는지와, 살아남는 데 중요한 관계가 무엇인지를 구분하는 대목을 읽기 접점으로 삼았다.
 ## P&K에서의 역할
-자아의 숫자상 동일성과 심리적 연속성을 같은 질문으로 뭉개지 않도록 하는 비교 자료다. 성준이 Parfit의 입장을 따른다고 결론내리지는 않는다. 이 글은 논문 전문이 아니라 P&K의 읽기 기록이다.`
+자아의 숫자상 동일성과 심리적 연속성을 같은 질문으로 뭉개지 않도록 하는 비교 자료다. 박성준이 Parfit의 입장을 따른다고 결론내리지는 않는다. 이 글은 논문 전문이 아니라 P&K의 읽기 기록이다.`
   },
   {
     id: 'paper-khalidi-2010', paper: 'khalidi-2010', title: '읽은 논문 · Khalidi (2010), Interactive Kinds', concept: '논문 분류 상호작용 관점 Khalidi',
@@ -91,7 +91,7 @@ G2.21의 자기 적용 충돌은 정의와 전제를 함께 넣으면 곧바로 
     body: `## 읽은 범위
 연구 기록에는 원본 PDF를 열어 가정과 정당화, 믿음 수정, 대안을 다루는 부분을 확인한 것으로 적혀 있다.
 ## P&K에서의 역할
-모순이 생길 때 규칙을 끝없이 덧붙이는 것만이 유일한 길인지 시험하는 반대 기준이다. 가정을 철회하거나 수정하는 추론 체계도 비교해야 한다. 그렇다고 이 시스템이 성준의 경험적 자아를 모형화한다고 볼 수는 없다. 이 글은 논문 전문이 아니라 P&K의 읽기 기록이다.`
+모순이 생길 때 규칙을 끝없이 덧붙이는 것만이 유일한 길인지 시험하는 반대 기준이다. 가정을 철회하거나 수정하는 추론 체계도 비교해야 한다. 그렇다고 이 시스템이 박성준의 경험적 자아를 모형화한다고 볼 수는 없다. 이 글은 논문 전문이 아니라 P&K의 읽기 기록이다.`
   },
   {
     id: 'paper-massimi-2022', paper: 'massimi-2022', title: '읽은 자료 · Massimi (2022), Perspectival Realism', concept: '논문 읽은 자료 관점 실재론 Massimi',
@@ -104,10 +104,10 @@ G2.21의 자기 적용 충돌은 정의와 전제를 함께 넣으면 곧바로 
 
 const literatureId = '3f4ef561-cf92-814e-94f2-f3e446376382';
 const bibliography = {
-  'parfit-1971': {author:'Parfit',year:1971,exact_title:'Personal Identity',doi:null,version:'원본 PDF 확인 · 판본 세부 정보 확인 전',read_status:'원본 PDF 앞부분 확인',original_claim:'개인 동일성의 결정 가능성과 생존에서 중요한 관계를 구분한다.',our_interpretation:'P&K의 자아 동일성 질문에서 수적 동일성과 심리적 연속성을 분리해 비교한다.',limitations:'전체 논문 독해를 이 기록만으로 주장하지 않는다.',park_relation:'성준의 발언이나 동의로 귀속하지 않는다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'},
-  'khalidi-2010': {author:'Khalidi',year:2010,exact_title:'Interactive Kinds',doi:null,version:'원본 PDF 확인 · 판본 세부 정보 확인 전',read_status:'초록·도입부 확인',original_claim:'개념적 분류와 분류 대상 사이의 되먹임을 논의한다.',our_interpretation:'분류의 변화와 세계의 변화를 구분하는 비교축으로 사용한다.',limitations:'전체 논문 독해 또는 모든 분류의 세계 창조를 주장하지 않는다.',park_relation:'성준의 원문이 아니라 외부 비교 자료다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'},
-  'doyle-1979': {author:'Doyle',year:1979,exact_title:'A Truth Maintenance System',doi:null,version:'원본 PDF 확인 · 판본 세부 정보 확인 전',read_status:'원본 PDF의 가정·정당화·수정 논의 확인',original_claim:'가정과 정당화의 의존 관계를 관리하고 믿음을 수정하는 체계를 제시한다.',our_interpretation:'모순 뒤 보조 규칙만 계속 더해야 한다는 예상의 반대 기준으로 사용한다.',limitations:'이 체계를 성준의 경험적 자아 모형으로 간주하지 않는다.',park_relation:'성준의 발언이나 승인으로 귀속하지 않는다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'},
-  'massimi-2022': {author:'Massimi',year:2022,exact_title:'Perspectival Realism',doi:null,version:'출판사 PDF 일부 확인 · 판본 세부 정보 확인 전',read_status:'앞부분·일부 추출 구간만 확인 · 전체 이론 독해 전',original_claim:'관점과 실재에 관한 논의를 전개한다. 정확한 장별 논증은 이 기록에서 주장하지 않는다.',our_interpretation:'관점 의존성을 자의성과 곧바로 같게 두지 않기 위한 잠정적 비교 자료다.',limitations:'전체 독해 전이므로 특정 장의 논증을 P&K의 근거로 삼지 않는다.',park_relation:'성준의 입장으로 귀속하지 않는다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'}
+  'parfit-1971': {author:'Parfit',year:1971,exact_title:'Personal Identity',doi:null,version:'원본 PDF 확인 · 판본 세부 정보 확인 전',read_status:'원본 PDF 앞부분 확인',original_claim:'개인 동일성의 결정 가능성과 생존에서 중요한 관계를 구분한다.',our_interpretation:'P&K의 자아 동일성 질문에서 수적 동일성과 심리적 연속성을 분리해 비교한다.',limitations:'전체 논문 독해를 이 기록만으로 주장하지 않는다.',park_relation:'박성준의 발언이나 동의로 귀속하지 않는다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'},
+  'khalidi-2010': {author:'Khalidi',year:2010,exact_title:'Interactive Kinds',doi:null,version:'원본 PDF 확인 · 판본 세부 정보 확인 전',read_status:'초록·도입부 확인',original_claim:'개념적 분류와 분류 대상 사이의 되먹임을 논의한다.',our_interpretation:'분류의 변화와 세계의 변화를 구분하는 비교축으로 사용한다.',limitations:'전체 논문 독해 또는 모든 분류의 세계 창조를 주장하지 않는다.',park_relation:'박성준의 원문이 아니라 외부 비교 자료다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'},
+  'doyle-1979': {author:'Doyle',year:1979,exact_title:'A Truth Maintenance System',doi:null,version:'원본 PDF 확인 · 판본 세부 정보 확인 전',read_status:'원본 PDF의 가정·정당화·수정 논의 확인',original_claim:'가정과 정당화의 의존 관계를 관리하고 믿음을 수정하는 체계를 제시한다.',our_interpretation:'모순 뒤 보조 규칙만 계속 더해야 한다는 예상의 반대 기준으로 사용한다.',limitations:'이 체계를 박성준의 경험적 자아 모형으로 간주하지 않는다.',park_relation:'박성준의 발언이나 승인으로 귀속하지 않는다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'},
+  'massimi-2022': {author:'Massimi',year:2022,exact_title:'Perspectival Realism',doi:null,version:'출판사 PDF 일부 확인 · 판본 세부 정보 확인 전',read_status:'앞부분·일부 추출 구간만 확인 · 전체 이론 독해 전',original_claim:'관점과 실재에 관한 논의를 전개한다. 정확한 장별 논증은 이 기록에서 주장하지 않는다.',our_interpretation:'관점 의존성을 자의성과 곧바로 같게 두지 않기 위한 잠정적 비교 자료다.',limitations:'전체 독해 전이므로 특정 장의 논증을 P&K의 근거로 삼지 않는다.',park_relation:'박성준의 입장으로 귀속하지 않는다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'}
 };
 const records = entries.map(entry => {
   const source_id = entry.paper ? `${literatureId}:${entry.paper}` : entry.source_id;
