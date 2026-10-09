@@ -2,6 +2,7 @@ const $ = id => document.getElementById(id);
 const el = (tag, text, className) => { const n=document.createElement(tag); if(text!==undefined)n.textContent=text; if(className)n.className=className; return n; };
 const date = value => new Date(value).toLocaleDateString('ko-KR');
 const labels={'FROZEN SOURCE':'원문 보관 문서','ACTIVE DERIVATIVE':'연구진의 해석','SUBMITTED FEEDBACK':'새 답변 · 검토 전','HOLD':'남은 문제','EXPERIMENT':'실험 기록'};
+const recordType=r=>r.source_kind==='notion-curated-paper-note'?'읽은 논문':r.source_kind==='notion-curated'?'연구 기록':labels[r.provenance]||r.provenance;
 
 export function createWorkspace({api,activeToken,getMember}) {
   let questions=[], replies=[], records=[], publicRecords=[], selectedQuestion=null, mode='questions', generation=0;
@@ -72,10 +73,10 @@ export function createWorkspace({api,activeToken,getMember}) {
   function renderRecords(){
     const box=$('record-list');box.replaceChildren();const query=$('record-search').value.trim().toLocaleLowerCase(),kind=$('record-filter').value;
     const latestVersions=[...new Map([...records].reverse().map(r=>[r.source_id,r])).values()];
-    const filtered=latestVersions.filter(r=>(!kind||r.provenance===kind)&&(r.title+' '+r.body+' '+r.concept).toLocaleLowerCase().includes(query));
+    const filtered=latestVersions.filter(r=>(!kind||(kind==='paper'?r.source_kind==='notion-curated-paper-note':kind==='theory'?r.source_kind==='notion-curated':r.provenance===kind))&&(r.title+' '+r.body+' '+r.concept).toLocaleLowerCase().includes(query));
     $('record-count').textContent=`${filtered.length}개의 기록`;
     if(!filtered.length)box.append(el('p',records.length?'조건에 맞는 기록이 없습니다.':'아직 공개한 기록이 없습니다. 공개로 지정한 글부터 이곳에 쌓입니다.','empty-note'));
-    for(const r of filtered){const published=publicRecords.some(p=>p.id===r.id);const b=button('',()=>openRecord(r.id),'record-row');b.append(el('span',labels[r.provenance]||r.provenance,'micro'),el('strong',r.title),el('span',member()?.role==='reviewer'?(published?'공개 중':'비공개 · 검토 중'):'읽기 →','row-meta'));box.append(b);}
+    for(const r of filtered){const published=publicRecords.some(p=>p.id===r.id);const b=button('',()=>openRecord(r.id),'record-row');b.append(el('span',recordType(r),'micro'),el('strong',r.title),el('span',member()?.role==='reviewer'?(published?'공개 중':'비공개 · 검토 중'):'읽기 →','row-meta'));box.append(b);}
   }
   function renderText(container,text){
     // Only known Notion wrappers are removed. Code blocks keep their exact text.
@@ -87,8 +88,8 @@ export function createWorkspace({api,activeToken,getMember}) {
     }
   }
   function openRecord(id){
-    const r=records.find(x=>x.id===id);if(!r)return;const dialog=$('record-reader');$('reader-title').textContent=r.title;const content=$('reader-content');content.replaceChildren();content.append(el('p',`${labels[r.provenance]} · 가져온 날짜 ${date(r.imported_at)}`,'detail-meta'));renderText(content,r.body);
-    const custody=el('details'),summary=el('summary','출처와 버전');custody.append(summary,el('p',`분류: ${r.provenance}`),el('p',`가져온 버전: ${r.source_revision}`),el('p',`보관된 본문 SHA-256: ${r.content_hash}`,'hash'));const raw=el('details');raw.append(el('summary','가져온 원문 형식 그대로 보기'),el('pre',r.body,'source-code'));custody.append(raw);content.append(custody);
+    const r=records.find(x=>x.id===id);if(!r)return;const dialog=$('record-reader');$('reader-title').textContent=r.title;const content=$('reader-content');content.replaceChildren();content.append(el('p',`${recordType(r)} · ${labels[r.provenance]} · ${date(r.imported_at)}`,'detail-meta'));renderText(content,r.body);
+    const custody=el('details'),summary=el('summary','출처와 버전');custody.append(summary,el('p',`분류: ${r.provenance}`),el('p',`출처 버전: ${r.source_revision}`),el('p',`이 화면 본문 SHA-256: ${r.content_hash}`,'hash'));if(r.source_url){const source=el('a','Notion의 근거 기록 ↗');source.href=r.source_url;source.target='_blank';source.rel='noopener noreferrer';custody.append(source);}const raw=el('details');raw.append(el('summary','이 화면의 텍스트 보기'),el('pre',r.body,'source-code'));custody.append(raw);content.append(custody);
     const actions=$('reader-actions');actions.replaceChildren();if(member()?.role==='reviewer'){
       actions.append(el('p',publicRecords.some(p=>p.id===r.id)?'GitHub에 공개된 버전입니다.':'공개할 버전은 검토 후 GitHub의 공개 기록 파일에 반영합니다.','detail-meta'));
       const versions=records.filter(v=>v.source_id===r.source_id);if(versions.length>1){const select=el('select');select.setAttribute('aria-label','기록 버전');for(const v of versions){const o=el('option',`${date(v.imported_at)} · ${publicRecords.some(p=>p.id===v.id)?'공개본':'보관본'}`);o.value=v.id;o.selected=v.id===id;select.append(o);}select.addEventListener('change',()=>openRecord(select.value));actions.append(select);}

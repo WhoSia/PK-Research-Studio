@@ -51,6 +51,14 @@ async function run(){
     });
     await page.goto('https://pk.local/');
     await page.getByRole('heading',{name:'질문과 답변'}).waitFor();
+    await page.getByText('10개의 기록').waitFor();
+    await page.locator('#record-filter').selectOption('paper');
+    await page.getByText('4개의 기록').waitFor();
+    await page.getByRole('button',{name:/Parfit \(1971\)/}).click();
+    await page.getByRole('heading',{name:/Parfit \(1971\)/}).waitFor();
+    assert.ok((await page.locator('#record-reader').getByText('논문 전문이 아니라 P&K의 읽기 기록이다.').count())>=1);
+    await page.getByRole('button',{name:'닫기 ×'}).click();
+    await page.locator('#record-filter').selectOption('');
     await page.getByRole('button',{name:'기억 개념 보기'}).click();
     await page.getByRole('button',{name:'관련 기록 읽기'}).click();
     assert.equal(new URL(page.url()).hash,'#records');

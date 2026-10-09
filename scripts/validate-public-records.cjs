@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
+const crypto = require('node:crypto');
 
 const file = path.join(__dirname, '..', 'content', 'public', 'records.json');
 const manifest = JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -18,7 +19,11 @@ for (const record of manifest.records) {
   assert.ok(!sourceIds.has(record.source_id), `duplicate source: ${record.source_id}`);
   ids.add(record.id); sourceIds.add(record.source_id);
   assert.ok(provenance.has(record.provenance), `unknown provenance: ${record.provenance}`);
+  assert.ok(['notion-curated', 'notion-curated-paper-note'].includes(record.source_kind), `non-curated source: ${record.id}`);
+  assert.equal(record.provenance, 'ACTIVE DERIVATIVE', `unexpected authority: ${record.id}`);
+  assert.match(record.source_url, /^https:\/\/app\.notion\.com\/p\/[a-f0-9]{32}$/);
   assert.match(record.content_hash, /^[a-f0-9]{64}$/);
+  assert.equal(record.content_hash, crypto.createHash('sha256').update(record.body, 'utf8').digest('hex'), `body hash mismatch: ${record.id}`);
   assert.ok(!Number.isNaN(Date.parse(record.imported_at)));
   assert.ok(!Number.isNaN(Date.parse(record.publication_approved_at)));
   assert.doesNotMatch(record.body, /(?:sb_secret_|service_role|ghp_|github_pat_)/i, 'possible secret');
