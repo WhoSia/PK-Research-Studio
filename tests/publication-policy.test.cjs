@@ -2,7 +2,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const {publicationDecision} = require('../lib/publication-policy.cjs');
-const approved = {provenance:'ACTIVE DERIVATIVE',visibility:'public',publication_approved_by:'reviewer',publication_approved_at:'2026-10-10',version:'r1',approved_version:'r1'};
+const approved = {provenance:'ACTIVE DERIVATIVE',visibility:'public',publication_approved_by:'reviewer',publication_approved_at:'2026-01-01',version:'r1',approved_version:'r1'};
 test('reviewed derivative can publish',()=>assert.equal(publicationDecision(approved).allowed,true));
 test('private is private regardless of approval',()=>assert.equal(publicationDecision({...approved,visibility:'private'}).reason,'NOT_PUBLIC'));
 test('stale version is blocked',()=>assert.equal(publicationDecision({...approved,version:'r2'}).reason,'APPROVAL_MISSING_OR_STALE'));
