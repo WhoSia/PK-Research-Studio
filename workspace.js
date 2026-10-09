@@ -1,3 +1,4 @@
+import {RIVAL_CASES,rivalCase} from './rival-model.mjs';
 import {filterResearchRecords,readingDepth,RESEARCH_TRAILS} from './atlas-utils.mjs';
 const $ = id => document.getElementById(id);
 const el = (tag, text, className) => { const n=document.createElement(tag); if(text!==undefined)n.textContent=text; if(className)n.className=className; return n; };
@@ -69,7 +70,54 @@ export function createWorkspace({api,activeToken,getMember}) {
     const manifest=await response.json();
     if(manifest.schema_version!==1||!Array.isArray(manifest.records))throw new Error('공개 기록 형식이 맞지 않습니다.');
     const privateRecords=member()?await request('library_versions?select=*&order=imported_at.desc&limit=1000'):[];
-    if(ticket===generation){publicRecords=manifest.records;records=[...publicRecords,...privateRecords.filter(r=>!publicRecords.some(p=>p.id===r.id))];renderRecords();if(mode==='answers')renderQuestions();}
+    if(ticket===generation){publicRecords=manifest.records;records=[...publicRecords,...privateRecords.filter(r=>!publicRecords.some(p=>p.id===r.id))];renderRecords();renderRivalAtlas();if(mode==='answers')renderQuestions();}
+  }
+
+  let activeRivalId=RIVAL_CASES[0].id;
+  function renderRivalAtlas(){
+    const choices=$('rival-choices'),columns=$('rival-columns');
+    choices.replaceChildren();columns.replaceChildren();
+    for(const c of RIVAL_CASES){
+      const b=button(c.question,()=>{activeRivalId=c.id;renderRivalAtlas();},'rival-choice');
+      b.setAttribute('aria-pressed',String(c.id===activeRivalId));
+      choices.append(b);
+    }
+    const comparison=rivalCase(activeRivalId,publicRecords);
+    if(!comparison){columns.append(el('p','공개 승인된 비교 자료가 충분하지 않아 해당 비교를 표시하지 않습니다.','empty-note'));return;}
+    const lane=(caption,title)=>{const box=el('article',undefined,'rival-lane');box.append(el('span',caption,'micro'),el('h4',title));columns.append(box);return box;};
+    const noteButton=(box,record,label='기록 자세히 읽기 ↗')=>{
+      const b=button(label,()=>openRecord(record.id),'rival-record-link');box.append(b);
+    };
+    const original=lane('01 / AUTHOR SOURCE','원문');
+    original.append(el('p',comparison.source.text,'rival-hold'));
+    original.append(el('p','공개 허가 여부와 실제 원문·인용 권한을 확인하기 전까지 이 칸은 비워 둡니다.','rival-small'));
+    const interpretation=lane('02 / APPROVED DERIVATIVE','연구진의 해석');
+    interpretation.append(el('h5',comparison.anchor.title));
+    renderText(interpretation,comparison.anchor.body);
+    noteButton(interpretation,comparison.anchor);
+    const opponents=lane('03 / LITERATURE NOTES','경쟁 문헌');
+    for(const paper of comparison.competitors){
+      const b=paper.bibliography||{};
+      const item=el('div',undefined,'rival-paper');
+      item.append(el('h5',paper.title),
+        el('p','연구진이 정리한 논문 주장: '+(b.original_claim||'개별 검증 전')),
+        el('p','P&K에서의 비교: '+(b.our_interpretation||'개별 검증 전')),
+        el('p','읽은 범위: '+(b.read_status||'확인 전'),'rival-small'),
+        el('p','한계: '+(b.limitations||'확인 전'),'rival-small'));
+      noteButton(item,paper,'독해 노트 보기 ↗');opponents.append(item);
+    }
+    opponents.append(el('p','논문을 나열하는 것은 P&K 가설의 독립 검증이나 원문 작성자의 동의를 뜻하지 않습니다.','rival-small'));
+    const counter=lane('04 / BOUNDED OBJECTION','반례·제한');
+    counter.append(el('p',comparison.objection.body||'개별 반례가 공개 기록에 확인되지 않습니다.','rival-hold'));
+    counter.append(el('p',comparison.objection.evidenceLevel+' · 독립 신규 실험 아님','rival-small'));
+    noteButton(counter,comparison.objection.record);
+    const history=lane('05 / EVIDENCE GENEALOGY','계보·판본');
+    history.append(el('p',comparison.revision.text,'rival-small'));
+    for(const r of comparison.genealogy){
+      const step=el('div',undefined,'rival-step');
+      step.append(el('h5',r.title),el('p','출처 판본: '+r.source_revision,'rival-small'));
+      noteButton(step,r,'관련 공개 기록 ↗');history.append(step);
+    }
   }
   function renderRecords(){
     const box=$('record-list');box.replaceChildren();const query=$('record-search').value.trim().toLocaleLowerCase(),kind=$('record-filter').value;
