@@ -4,7 +4,7 @@ const date = value => new Date(value).toLocaleDateString('ko-KR');
 const labels={'FROZEN SOURCE':'원문 보관 문서','ACTIVE DERIVATIVE':'연구진의 해석','SUBMITTED FEEDBACK':'새 답변 · 검토 전','HOLD':'남은 문제','EXPERIMENT':'실험 기록'};
 
 export function createWorkspace({api,activeToken,getMember}) {
-  let questions=[], replies=[], records=[], publications=[], selectedQuestion=null, mode='questions', generation=0;
+  let questions=[], replies=[], records=[], publicRecords=[], selectedQuestion=null, mode='questions', generation=0;
   let draftDirty=false;
   const member=()=>getMember();
   const request=async(path,options={})=>api('/rest/v1/'+path,{...options,token:await activeToken()});
@@ -62,8 +62,12 @@ export function createWorkspace({api,activeToken,getMember}) {
   }
   async function loadRecords(){
     const ticket=generation;
-    const [r,p]=await Promise.all([request('library_versions?select=*&order=imported_at.desc&limit=1000'),request('library_publications?select=*')]);
-    if(ticket===generation){records=r;publications=p;renderRecords();if(mode==='answers')renderQuestions();}
+    const response=await fetch('/content/public/records.json',{cache:'no-store'});
+    if(!response.ok)throw new Error('공개 기록을 읽지 못했습니다.');
+    const manifest=await response.json();
+    if(manifest.schema_version!==1||!Array.isArray(manifest.records))throw new Error('공개 기록 형식이 맞지 않습니다.');
+    const privateRecords=member()?await request('library_versions?select=*&order=imported_at.desc&limit=1000'):[];
+    if(ticket===generation){publicRecords=manifest.records;records=[...publicRecords,...privateRecords.filter(r=>!publicRecords.some(p=>p.id===r.id))];renderRecords();if(mode==='answers')renderQuestions();}
   }
   function renderRecords(){
     const box=$('record-list');box.replaceChildren();const query=$('record-search').value.trim().toLocaleLowerCase(),kind=$('record-filter').value;
@@ -71,7 +75,7 @@ export function createWorkspace({api,activeToken,getMember}) {
     const filtered=latestVersions.filter(r=>(!kind||r.provenance===kind)&&(r.title+' '+r.body+' '+r.concept).toLocaleLowerCase().includes(query));
     $('record-count').textContent=`${filtered.length}개의 기록`;
     if(!filtered.length)box.append(el('p',records.length?'조건에 맞는 기록이 없습니다.':'아직 공개한 기록이 없습니다. 공개로 지정한 글부터 이곳에 쌓입니다.','empty-note'));
-    for(const r of filtered){const pub=publications.find(p=>p.source_id===r.source_id);const b=button('',()=>openRecord(r.id),'record-row');b.append(el('span',labels[r.provenance]||r.provenance,'micro'),el('strong',r.title),el('span',member()?.role==='reviewer'?(pub?.version_id===r.id?'공개 중':pub?'새 버전 · 공개 전':'비공개'):'읽기 →','row-meta'));box.append(b);}
+    for(const r of filtered){const published=publicRecords.some(p=>p.id===r.id);const b=button('',()=>openRecord(r.id),'record-row');b.append(el('span',labels[r.provenance]||r.provenance,'micro'),el('strong',r.title),el('span',member()?.role==='reviewer'?(published?'공개 중':'비공개 · 검토 중'):'읽기 →','row-meta'));box.append(b);}
   }
   function renderText(container,text){
     // Only known Notion wrappers are removed. Code blocks keep their exact text.
@@ -86,10 +90,8 @@ export function createWorkspace({api,activeToken,getMember}) {
     const r=records.find(x=>x.id===id);if(!r)return;const dialog=$('record-reader');$('reader-title').textContent=r.title;const content=$('reader-content');content.replaceChildren();content.append(el('p',`${labels[r.provenance]} · 가져온 날짜 ${date(r.imported_at)}`,'detail-meta'));renderText(content,r.body);
     const custody=el('details'),summary=el('summary','출처와 버전');custody.append(summary,el('p',`분류: ${r.provenance}`),el('p',`가져온 버전: ${r.source_revision}`),el('p',`보관된 본문 SHA-256: ${r.content_hash}`,'hash'));const raw=el('details');raw.append(el('summary','가져온 원문 형식 그대로 보기'),el('pre',r.body,'source-code'));custody.append(raw);content.append(custody);
     const actions=$('reader-actions');actions.replaceChildren();if(member()?.role==='reviewer'){
-      const pub=publications.find(p=>p.source_id===r.source_id);
-      actions.append(button(pub?.version_id===r.id?'공개 중':'이 버전을 공개',async()=>{if(!window.confirm('이 기록의 본문 전체를 누구나 읽을 수 있게 공개할까요?'))return;try{await request('library_publications?on_conflict=source_id',{method:'POST',headers:{Prefer:'resolution=merge-duplicates'},body:{source_id:r.source_id,version_id:r.id}});await loadRecords();openRecord(id);}catch(e){notice('공개하지 못했습니다. '+e.message);}}));actions.firstChild.disabled=pub?.version_id===r.id;
-      if(pub)actions.append(button('공개 내리기',async()=>{try{await request('library_publications?source_id=eq.'+encodeURIComponent(r.source_id),{method:'DELETE'});await loadRecords();openRecord(id);}catch(e){notice(e.message);}}));
-      const versions=records.filter(v=>v.source_id===r.source_id);if(versions.length>1){const select=el('select');select.setAttribute('aria-label','기록 버전');for(const v of versions){const o=el('option',`${date(v.imported_at)} · ${v.id===pub?.version_id?'공개본':'보관본'}`);o.value=v.id;o.selected=v.id===id;select.append(o);}select.addEventListener('change',()=>openRecord(select.value));actions.append(select);}
+      actions.append(el('p',publicRecords.some(p=>p.id===r.id)?'GitHub에 공개된 버전입니다.':'공개할 버전은 검토 후 GitHub의 공개 기록 파일에 반영합니다.','detail-meta'));
+      const versions=records.filter(v=>v.source_id===r.source_id);if(versions.length>1){const select=el('select');select.setAttribute('aria-label','기록 버전');for(const v of versions){const o=el('option',`${date(v.imported_at)} · ${publicRecords.some(p=>p.id===v.id)?'공개본':'보관본'}`);o.value=v.id;o.selected=v.id===id;select.append(o);}select.addEventListener('change',()=>openRecord(select.value));actions.append(select);}
     }
     if(!dialog.open)dialog.showModal();
   }
@@ -104,7 +106,7 @@ export function createWorkspace({api,activeToken,getMember}) {
   $('refresh-records').addEventListener('click',async()=>{try{await loadRecords();$('record-status').textContent='웹에 저장된 기록을 다시 읽었습니다.';}catch(e){$('record-status').textContent='기록을 읽지 못했습니다. '+e.message;}});
   $('notion-import-form').addEventListener('submit',async e=>{e.preventDefault();const submit=e.currentTarget.querySelector('button');submit.disabled=true;try{const response=await fetch('/api/notion-sync',{method:'POST',headers:{Authorization:'Bearer '+await activeToken(),'Content-Type':'application/json'},body:JSON.stringify({pageId:$('notion-page').value.trim()})});const result=await response.json();if(!response.ok)throw new Error(result.message||'가져오지 못했습니다.');await loadRecords();$('record-status').textContent='새 버전을 비공개로 가져왔습니다. 본문을 확인한 뒤 공개해 주세요.';}catch(err){$('record-status').textContent=err.message;}finally{submit.disabled=false;}});
   return {
-    async refresh(){const ticket=++generation;$('question-detail').hidden=true;$('question-list').hidden=false;questions=[];replies=[];records=[];publications=[];if($('record-reader').open)$('record-reader').close();$('reader-content').replaceChildren();$('reader-actions').replaceChildren();$('question-detail').replaceChildren();renderQuestions();renderRecords();$('new-question-toggle').hidden=member()?.role!=='reviewer';$('new-question-form').hidden=true;$('notion-import').hidden=member()?.role!=='reviewer';try{await loadPrivate();if(ticket!==generation)return;renderQuestions();await loadRecords();}catch(e){if(ticket===generation)notice('기록을 불러오지 못했습니다. 새로고침해 다시 시도해 주세요. '+e.message);}},
+    async refresh(){const ticket=++generation;$('question-detail').hidden=true;$('question-list').hidden=false;questions=[];replies=[];records=[];publicRecords=[];if($('record-reader').open)$('record-reader').close();$('reader-content').replaceChildren();$('reader-actions').replaceChildren();$('question-detail').replaceChildren();renderQuestions();renderRecords();$('new-question-toggle').hidden=member()?.role!=='reviewer';$('new-question-form').hidden=true;$('notion-import').hidden=member()?.role!=='reviewer';try{await loadPrivate();if(ticket!==generation)return;renderQuestions();await loadRecords();}catch(e){if(ticket===generation)notice('기록을 불러오지 못했습니다. 새로고침해 다시 시도해 주세요. '+e.message);}},
     findRecords:workspaceSearch,
     askAbout(concept){$('question-concept').value=concept;location.hash='questions';if(member()?.role==='reviewer'){$('new-question-form').hidden=false;$('question-title').focus();}else notice('질문 작성은 우준 님 계정에서 할 수 있습니다. 성준 님은 올라온 질문에 답변을 남길 수 있습니다.');}
   };

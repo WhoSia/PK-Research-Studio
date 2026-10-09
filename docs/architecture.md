@@ -5,15 +5,15 @@
 - Source: `WhoSia/PK-Research-Studio`, static HTML/CSS/ES module. No build dependency or GitHub Actions workflow.
 - Hosting: Vercel static project. The first production deployment used the exact files from Git commit `451b1be` through the Vercel API. Vercel's GitHub connection was unavailable, so future pushes do not deploy automatically; deploy each reviewed commit explicitly until the owner connects GitHub in Vercel.
 - Identity and durable feedback: a dedicated Supabase Auth/Postgres project in Seoul. The browser uses only its publishable key. Database RLS is the authorization boundary.
-- Research source of record: P&K Research OS in Notion. The public site carries curated stage metadata and derivative descriptions, not private raw source bytes.
+- Research source of record: P&K Research OS in Notion. The public site carries curated stage metadata and derivative descriptions, not private raw source bytes. Approved public reading-room records are versioned in GitHub; private working copies stay in Supabase.
 
 ## Question and reading flow
 
 The reviewer can post a question; invited participants can append an answer revision. The database accepts only the next revision number and grants no update or delete permission on answers. The answer reading view places the original question above each latest answer and exposes its earlier revisions. Existing Notion source documents appear in the same reading flow after they have been imported and made visible to the reader.
 
-Notion import writes a complete page snapshot to `library_versions`. It never edits the Notion page. Each version has its Notion page ID, revision, arrival time and a SHA-256 hash of the stored body. `library_publications` points to one exact version. Its absence makes the version invisible to anonymous visitors. The reviewer can inspect imports while they are private and can withdraw a publication. The on-site importer requires a server-side Notion token that is not configured yet; the attempted connector-based import was blocked by an automatic approval usage-limit error, so no source snapshots were added. The public reading room currently has no imported records.
+Notion import writes a complete page snapshot to private `library_versions`. It never edits the Notion page. Each version has its Notion page ID, revision, arrival time and a SHA-256 hash of the stored body. A reviewer can inspect imports while they are private. Approved public versions are copied into `content/public/records.json` through a reviewed Git change and manual deployment; anonymous visitors read that file without a database request. The existing `library_publications` table is no longer the public serving path. The on-site importer requires a server-side Notion token that is not configured yet; the attempted connector-based import was blocked by a Codex automatic approval usage-limit error, not a Supabase Free quota, so no source snapshots were added. The public reading room currently has no imported records.
 
-This is a page snapshot model, not live mirroring. A new import leaves the existing approved version published until the reviewer inspects and chooses the next version. Notion can change without the site changing; the page revision shown in the reader makes that visible.
+This is a page snapshot model, not live mirroring. A new import cannot change the deployed public version until the reviewer approves the next exact version and it is committed and deployed. Notion can change without the site changing; the page revision shown in the reader makes that visible. Git history retains previously published content, so private material must never enter this file, even temporarily.
 
 ## Access model
 
