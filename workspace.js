@@ -1,3 +1,4 @@
+import {filterResearchRecords,readingDepth,RESEARCH_TRAILS} from './atlas-utils.mjs';
 const $ = id => document.getElementById(id);
 const el = (tag, text, className) => { const n=document.createElement(tag); if(text!==undefined)n.textContent=text; if(className)n.className=className; return n; };
 const date = value => new Date(value).toLocaleDateString('ko-KR');
@@ -73,10 +74,30 @@ export function createWorkspace({api,activeToken,getMember}) {
   function renderRecords(){
     const box=$('record-list');box.replaceChildren();const query=$('record-search').value.trim().toLocaleLowerCase(),kind=$('record-filter').value;
     const latestVersions=[...new Map([...records].reverse().map(r=>[r.source_id,r])).values()];
-    const filtered=latestVersions.filter(r=>(!kind||(kind==='paper'?r.source_kind==='notion-curated-paper-note':kind==='theory'?r.source_kind==='notion-curated':r.provenance===kind))&&(r.title+' '+r.body+' '+r.concept).toLocaleLowerCase().includes(query)).sort((a,b)=>Number(a.source_kind==='notion-curated-paper-note')-Number(b.source_kind==='notion-curated-paper-note'));
+    const filtered=filterResearchRecords(latestVersions,{query,kind});
     $('record-count').textContent=`${filtered.length}개의 기록`;
+    const guide=$('record-reading-guide');guide.replaceChildren();
+    const papers=filtered.filter(r=>r.source_kind==='notion-curated-paper-note');
+    guide.append(el('strong',`${filtered.length}개 기록 · 문헌 독해 노트 ${papers.length}개`),
+      el('p','공개된 문헌 카드는 원문 자체가 아니라 연구진의 해석입니다. 읽은 범위와 한계를 반드시 확인하세요.'));
+    const trails=$('reading-trails');trails.replaceChildren();
+    const trailLabel=el('span','질문을 따라 읽기','micro');trails.append(trailLabel);
+    const selectedQuery=$('record-search').value.trim().toLocaleLowerCase();
+    for(const trail of RESEARCH_TRAILS){
+      const shortcut=button(trail.label,()=>workspaceSearch(trail.query),'reading-trail');
+      shortcut.setAttribute('aria-pressed',String(selectedQuery===trail.query.toLocaleLowerCase()));
+      trails.append(shortcut);
+    }
+    const clear=button('전체 보기',()=>workspaceSearch(''),'reading-trail');
+    trails.append(clear);
     if(!filtered.length)box.append(el('p',records.length?'조건에 맞는 기록이 없습니다.':'아직 공개한 기록이 없습니다. 공개로 지정한 글부터 이곳에 쌓입니다.','empty-note'));
-    for(const r of filtered){const published=publicRecords.some(p=>p.id===r.id);const b=button('',()=>openRecord(r.id),'record-row');b.append(el('span',recordType(r),'micro'),el('strong',r.source_kind==='notion-curated-paper-note'?r.title.replace(/^읽은 (논문|자료) · /,''):r.title),el('span',member()?.role==='reviewer'?(published?'공개 중':'비공개 · 검토 중'):'읽기 →','row-meta'));box.append(b);}
+    for(const r of filtered){const published=publicRecords.some(p=>p.id===r.id);const b=button('',()=>openRecord(r.id),'record-row');
+      b.append(el('span',recordType(r),'micro'),
+        el('strong',r.source_kind==='notion-curated-paper-note'?r.title.replace(/^읽은 (논문|자료) · /,''):r.title),
+        el('span',member()?.role==='reviewer'?(published?'공개 중':'비공개 · 검토 중'):'읽기 →','row-meta'));
+      const depth=readingDepth(r);
+      if(depth){b.classList.add('record-row-paper');b.append(el('span',`읽은 범위: ${depth.scope} · 한계: ${depth.limit}`,'record-reading-depth'));}
+      box.append(b);}
   }
   function renderText(container,text){
     // Only known Notion wrappers are removed. Code blocks keep their exact text.
