@@ -62,5 +62,5 @@ test('website wiring exposes five-lane comparison but leaves manifest unchanged'
   assert.match(html,/id="rival-choices"/);
   assert.match(js,/rivalCase\(activeRivalId,publicRecords\)/);
   assert.match(js,/function renderRivalAtlas/);
-  assert.equal(records.length,10);
+  assert.equal(records.length,11);assert.equal(records.filter(r=>r.id==='g222-p1-rival-semantics').length,1);
 });
