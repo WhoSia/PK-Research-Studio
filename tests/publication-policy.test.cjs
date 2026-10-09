@@ -19,3 +19,10 @@ test('undefined authority fails closed',()=>assert.equal(publicationDecision({..
 test('Seoul date-only approval accepted during corresponding local day',()=>assert.equal(publicationDecision({...approved,publication_approved_at:'2026-10-10'},{now:'2026-10-09T19:00:00.000Z'}).allowed,true));
 test('future Seoul date-only approval rejected',()=>assert.equal(publicationDecision({...approved,publication_approved_at:'2026-10-11'},{now:'2026-10-09T19:00:00.000Z'}).reason,'INVALID_APPROVAL_DATE'));
 test('future approval timestamp rejected regardless of zone',()=>assert.equal(publicationDecision({...approved,publication_approved_at:'2026-10-10T09:00:00+09:00'},{now:'2026-10-09T19:00:00.000Z'}).reason,'INVALID_APPROVAL_DATE'));
+
+test('calendar rollover cannot forge an approval day',()=>assert.equal(publicationDecision({...approved,publication_approved_at:'2026-02-30'},{now:'2026-10-10T00:00:00Z'}).reason,'INVALID_APPROVAL_DATE'));
+test('nonexistent leap day is refused',()=>assert.equal(publicationDecision({...approved,publication_approved_at:'2025-02-29'},{now:'2026-10-10T00:00:00Z'}).reason,'INVALID_APPROVAL_DATE'));
+test('valid leap day remains admissible',()=>assert.equal(publicationDecision({...approved,publication_approved_at:'2024-02-29'},{now:'2026-10-10T00:00:00Z'}).allowed,true));
+test('timezone-less approval instant is ambiguous and refused',()=>assert.equal(publicationDecision({...approved,publication_approved_at:'2026-01-01T12:30:00'},{now:'2026-10-10T00:00:00Z'}).reason,'INVALID_APPROVAL_DATE'));
+test('RFC3339 approval instant with offset is accepted',()=>assert.equal(publicationDecision({...approved,publication_approved_at:'2026-10-10T08:00:00+09:00'},{now:'2026-10-10T00:00:00Z'}).allowed,true));
+test('numeric approval time is invalid even if parseable',()=>assert.equal(publicationDecision({...approved,publication_approved_at:0},{now:'2026-10-10T00:00:00Z'}).reason,'APPROVAL_MISSING_OR_STALE'));
