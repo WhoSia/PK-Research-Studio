@@ -56,6 +56,7 @@ async function run(){
     await page.getByText('4개의 기록').waitFor();
     await page.getByRole('button',{name:/Parfit \(1971\)/}).click();
     await page.getByRole('heading',{name:/Parfit \(1971\)/}).waitFor();
+    await page.getByText('원본 PDF 앞부분 확인').waitFor();
     assert.ok((await page.locator('#record-reader').getByText('논문 전문이 아니라 P&K의 읽기 기록이다.').count())>=1);
     await page.getByRole('button',{name:'닫기 ×'}).click();
     await page.locator('#record-filter').selectOption('');

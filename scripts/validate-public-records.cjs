@@ -27,5 +27,12 @@ for (const record of manifest.records) {
   assert.ok(!Number.isNaN(Date.parse(record.imported_at)));
   assert.ok(!Number.isNaN(Date.parse(record.publication_approved_at)));
   assert.doesNotMatch(record.body, /(?:sb_secret_|service_role|ghp_|github_pat_)/i, 'possible secret');
+  if (record.source_kind === 'notion-curated-paper-note') {
+    assert.ok(record.bibliography, `missing bibliography: ${record.id}`);
+    for (const field of ['author','exact_title','version','read_status','original_claim','our_interpretation','limitations','park_relation','license']) {
+      assert.equal(typeof record.bibliography[field], 'string', `bibliography ${field} missing: ${record.id}`);
+    }
+    assert.ok(record.bibliography.doi === null || typeof record.bibliography.doi === 'string');
+  }
 }
 console.log(`PASS: ${manifest.records.length} approved public record(s)`);
