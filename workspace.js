@@ -73,10 +73,10 @@ export function createWorkspace({api,activeToken,getMember}) {
   function renderRecords(){
     const box=$('record-list');box.replaceChildren();const query=$('record-search').value.trim().toLocaleLowerCase(),kind=$('record-filter').value;
     const latestVersions=[...new Map([...records].reverse().map(r=>[r.source_id,r])).values()];
-    const filtered=latestVersions.filter(r=>(!kind||(kind==='paper'?r.source_kind==='notion-curated-paper-note':kind==='theory'?r.source_kind==='notion-curated':r.provenance===kind))&&(r.title+' '+r.body+' '+r.concept).toLocaleLowerCase().includes(query));
+    const filtered=latestVersions.filter(r=>(!kind||(kind==='paper'?r.source_kind==='notion-curated-paper-note':kind==='theory'?r.source_kind==='notion-curated':r.provenance===kind))&&(r.title+' '+r.body+' '+r.concept).toLocaleLowerCase().includes(query)).sort((a,b)=>Number(a.source_kind==='notion-curated-paper-note')-Number(b.source_kind==='notion-curated-paper-note'));
     $('record-count').textContent=`${filtered.length}개의 기록`;
     if(!filtered.length)box.append(el('p',records.length?'조건에 맞는 기록이 없습니다.':'아직 공개한 기록이 없습니다. 공개로 지정한 글부터 이곳에 쌓입니다.','empty-note'));
-    for(const r of filtered){const published=publicRecords.some(p=>p.id===r.id);const b=button('',()=>openRecord(r.id),'record-row');b.append(el('span',recordType(r),'micro'),el('strong',r.title),el('span',member()?.role==='reviewer'?(published?'공개 중':'비공개 · 검토 중'):'읽기 →','row-meta'));box.append(b);}
+    for(const r of filtered){const published=publicRecords.some(p=>p.id===r.id);const b=button('',()=>openRecord(r.id),'record-row');b.append(el('span',recordType(r),'micro'),el('strong',r.source_kind==='notion-curated-paper-note'?r.title.replace(/^읽은 (논문|자료) · /,''):r.title),el('span',member()?.role==='reviewer'?(published?'공개 중':'비공개 · 검토 중'):'읽기 →','row-meta'));box.append(b);}
   }
   function renderText(container,text){
     // Only known Notion wrappers are removed. Code blocks keep their exact text.
