@@ -27,7 +27,7 @@ if(root){
     const survivors=identifiedCauses(observations);
     counts.textContent=state.mode==='observe'
       ?'자연 관찰 두 사례로는 두 모형이 모두 남습니다. 원인을 식별할 수 없습니다.'
-      :'합성 개입에서 예측이 갈립니다. 표시된 1은 가상 개입 결과이지 사람의 관찰값이 아닙니다. 이 결과가 관측됐다고 가정하면 방향성 모형만 남습니다.';
+      :'합성 개입에서 예측이 갈립니다. 방향성 모형의 예측을 가상 관측값으로 놓았을 때에만 이 작은 모형 집합에서 방향성 모형이 남습니다. 실제 사람의 관측값은 아닙니다.';
     root.querySelector('#g224-case').textContent=`환경 E=${r.environment} · 표현 X_A=${r.expression} · ${state.mode==='observe'?'자연 관찰':'가상 개입'} · 후보 ${survivors.length}/2`;
   }
   root.querySelectorAll('[data-g224-mode]').forEach(b=>b.addEventListener('click',()=>{state.mode=b.dataset.g224Mode;show();}));
