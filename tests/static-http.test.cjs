@@ -22,6 +22,8 @@ test('local HTTP exposes the approved source atlas but not server/private code',
       ['/workspace.js','text/javascript','filterResearchRecords'],
       ['/atlas-utils.mjs','text/javascript','readingDepth'],
       ['/rival-model.mjs','text/javascript','rivalCase'],
+      ['/g224-model.mjs','text/javascript','comparePerspectives'],
+      ['/g224-frontier.mjs','text/javascript','g224-lab'],
       ['/content/public/records.json','application/json','schema_version']
     ]){
       const response=await fetch(base+url);
