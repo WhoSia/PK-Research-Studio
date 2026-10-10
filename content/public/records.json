@@ -217,6 +217,51 @@
       "imported_at": "2026-10-10",
       "publication_approved_by": "project owner · 2026-10-10 instruction for selective P1 research-summary publication",
       "publication_approved_at": "2026-10-10"
+    },
+    {
+      "id": "g223-jurisdiction",
+      "source_kind": "notion-curated",
+      "source_id": "3f5ef561cf92813baffad6ac3d7d39f9:g223-jurisdiction",
+      "source_revision": "2026-10-10T08:30:00Z",
+      "source_url": "https://app.notion.com/p/3f5ef561cf92813baffad6ac3d7d39f9",
+      "title": "G2.23 실험 A · 자기 적용 가능성과 진리값 구분",
+      "concept": "G2.23 자기 적용 적용 여부 관할 중간 상태 미정 판단",
+      "provenance": "ACTIVE DERIVATIVE",
+      "body": "## 질문\n규칙을 자기 자신에게 적용할 수 있는지의 문제와, 적용 뒤 참인지 거짓인지는 다른 문제다.\n## 경쟁 조건\nON은 자기 적용을 허용한다. OFF는 적용 범위 밖이다. UNRESOLVED는 적용 자격이 정해지지 않았다는 뜻이며 제3의 진리값과 같지 않다.\n## 반증 설계\n같은 문장과 논리 체계에서 적용 관할만 변경해 결과를 비교한다. 적용 불가를 거짓 판정으로 세지 않는다.\n## 현재 상태\n연구진의 합성 실험 설계만 준비됐다. 저자 해석 검증과 본실험은 아직 수행되지 않았다.",
+      "content_hash": "f150bc8933720f7a2a07ff303195d9e04a73aab9c87db9de1dbf75daf33ea30f",
+      "imported_at": "2026-10-10",
+      "publication_approved_by": "project owner · 2026-10-10 instruction to expand public research materials selectively",
+      "publication_approved_at": "2026-10-10"
+    },
+    {
+      "id": "g223-expression",
+      "source_kind": "notion-curated",
+      "source_id": "3f5ef561cf92813baffad6ac3d7d39f9:g223-expression",
+      "source_revision": "2026-10-10T08:30:00Z",
+      "source_url": "https://app.notion.com/p/3f5ef561cf92813baffad6ac3d7d39f9",
+      "title": "G2.23 실험 B · 표현은 기록인가 개입인가",
+      "concept": "G2.23 표현 관점 사고 개입 단순 보고 숨은 상태 인과",
+      "provenance": "ACTIVE DERIVATIVE",
+      "body": "## 질문\n어떤 생각을 표현하는 행동이 이미 있던 관점을 보고하는가, 아니면 이후 판단을 변화시키는가?\n## 경쟁 조건\nREPORT 모형은 관점을 그대로 두고 진술만 기록한다. INTERVENTION 모형은 같은 관점에서 표현 행위가 후속 상태를 바꿀 수 있다. HIDDEN-STATE 모형은 보이지 않는 이전 이력만으로 같은 변화를 설명한다.\n## 반증 설계\n현재 발화가 같은 경우에도 이후 관점과 판단이 달라지는지 비교하고, 숨은 상태의 대체 설명을 반드시 포함한다.\n## 현재 상태\n인과 효과의 실제 관측은 없다. 특정 개인이나 작품 속 대상의 상호작용을 주장하지 않는다.",
+      "content_hash": "6dc1af4a0a0fb10171fadf276c8c67cf532f09d3baf59003c5f2669750ba0f9f",
+      "imported_at": "2026-10-10",
+      "publication_approved_by": "project owner · 2026-10-10 instruction to expand public research materials selectively",
+      "publication_approved_at": "2026-10-10"
+    },
+    {
+      "id": "g223-inverse",
+      "source_kind": "notion-curated",
+      "source_id": "3f5ef561cf92813baffad6ac3d7d39f9:g223-inverse",
+      "source_revision": "2026-10-10T08:30:00Z",
+      "source_url": "https://app.notion.com/p/3f5ef561cf92813baffad6ac3d7d39f9",
+      "title": "G2.23 실험 C · 표상 역추적의 식별 가능성",
+      "concept": "G2.23 역문제 표상 식별성 관측 동등성 추가 질문",
+      "provenance": "ACTIVE DERIVATIVE",
+      "body": "## 질문\n나중의 판단과 표현만으로 그것을 만든 과거의 내적 과정을 하나로 복원할 수 있을까?\n## 경쟁 조건\n서로 다른 잠재 상태가 같은 관측을 낼 수 있으면 역문제의 해는 집합으로 남는다. 독립적인 추가 관측으로 그 집합이 줄어드는지 검증한다.\n## 최소 반례\n잠재 상태 0과 2는 관측값을 2로 나눈 나머지로 정의하면 둘 다 0이다. 추가 관측이 없으면 둘 중 하나를 특정할 수 없다.\n## 현재 상태\n이는 수학적 설계 반례이지 실제 내적 경험을 측정한 결과가 아니다.",
+      "content_hash": "4e113e9c9362587b7855e6625af635892fe929afeae83005cadc37fb5989853a",
+      "imported_at": "2026-10-10",
+      "publication_approved_by": "project owner · 2026-10-10 instruction to expand public research materials selectively",
+      "publication_approved_at": "2026-10-10"
     }
   ]
 }
