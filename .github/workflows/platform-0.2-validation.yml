@@ -18,6 +18,7 @@ on:
       - 'g224-*.mjs'
       - 'app.js'
       - 'research/g223/**'
+      - 'research/g224/**'
       - '.github/workflows/platform-0.2-validation.yml'
   workflow_dispatch:
 permissions:
@@ -41,6 +42,8 @@ jobs:
         run: python3 research/g222-p2/strong_bridge_independent.py
       - name: G2.23 independent causal reference audit
         run: python3 research/g223/independent_audit.py
+      - name: G2.24-P1 independent Python identification court
+        run: python3 research/g224/p1/independent_audit.py
       - name: Manifest builder reproducibility
         run: |
           node scripts/build-public-records.cjs
