@@ -5,7 +5,7 @@
 Run locally:
 ```sh
 node --test tests/g222-p2.test.cjs
-node -p 'JSON.stringify(require("./research/g222-p2/reference.cjs").runReference(), null, 2)'
+node -p 'JSON.stringify(require("./research/g222-p2/reference.cjs").runReference(), null, 2)'\npython3 research/g222-p2/independent_audit.py
 ```
 
 ## Competing finite objects
@@ -22,7 +22,7 @@ node -p 'JSON.stringify(require("./research/g222-p2/reference.cjs").runReference
 - **No cross-host claim that formal contradiction means Park contradicted himself.** Source-to-formal bridge B remains independent unapproved question.
 - **No fake empirical replication.** Tests are formal toy-model unit tests; B0–B6 remains NO RUN.
 - **No independent *implementations* claimed yet**: Y finite backward construction vs independent exhaustive valuation checker gives algorithmic cross-check on finite n, but all share JavaScript and the same formal specification.
-- C0/C1/C2/C3 bounded examples covered here. C4 history-sensitive revision, C5 enriched-state law, C6 alternate source bridge and full G2.21 executable contract HOLD.
+- C0/C1/C2/C3 bounded examples covered here. C4 now has a **bounded lexicographic world-ranking example**, with identical current top world but different subsequent evidence-driven choices; this is not a proof of Darwiche–Pearl representation postulates. C5 now has a **fixed transition on an augmented Boolean state**, in which equal visible states may have different successors because the hidden mode differs. An independent Python bounded enumerator checks K/Y/AGM/C4/C5 apart from the JavaScript test implementation, but both share the stipulated toy semantics. C6 source-author bridge and the full G2.21 executable contract remain HOLD.
 
 ## Main P2 release criterion
 
