@@ -73,18 +73,6 @@ G2.21의 자기 적용 충돌은 정의와 전제를 함께 넣으면 곧바로 
 이것은 실행 전 설계 감사다. G2.21이 현재 과학적 단계이며 GATE-59의 구현 사전 절차와 실험은 아직 끝나지 않았다.`
   },
   {
-    id: 'g222-p1-rival-semantics', source_id: '3f4ef561-cf92-814f-9535-f0b4e364352d', revision: '2026-10-09T21:40:11.129Z',
-    title: 'G2.22-P1 · Kripke·Yablo·AGM 경쟁 설계 법정', concept: 'G2.22 Kripke Yablo AGM 진리 의미론 역설 믿음 수정 반례',
-    body: `## 무엇을 비교했나
-연구진은 Kripke(1975)의 부분적 진리 의미론, Yablo(1993)의 무한 문장열 역설, Alchourrón·Gärdenfors·Makinson(1985)의 믿음 철회·수정 연산을 G2.22 실험 설계의 경쟁 설명으로 대조했다. 이는 세 이론이 동일한 결론을 지지한다는 뜻이 아니다.
-## 서로 다른 반례
-Kripke의 고정점 논의는 자기 적용이 곧바로 끝없는 규칙 추가를 강제한다는 주장을 공격한다. Yablo의 역설은 직접 자기지시를 제거해도 고전적 무한 문장열에서는 문제가 남을 수 있음을 보여주지만, 유한 절단을 같은 것으로 취급할 수 없다. AGM은 충돌 뒤 가정의 철회와 수정이 가능한 대안을 제시한다.
-## 앞으로 검증할 것
-고전적 이가 의미론, 부분적 진리, 무한·유한 문장 의존성, 믿음 수정 연산, 이력 의존성을 독립적으로 바꾸어 보아야 한다. G2.22는 현재 경쟁 설계 감사 단계이며 실제 시뮬레이션은 수행되지 않았다.
-## 해석과 공개의 경계
-이는 연구진이 작성한 공개용 파생 요약이다. 박성준의 원문, 사적인 대화, 승인되지 않은 해석 적합성 판단, 논문 PDF 원문을 포함하지 않는다. 개별 논문의 모든 증명을 완전 검증한 보고서가 아니며 박성준의 철학이 세 이론 중 어느 하나와 일치한다고 주장하지 않는다.`
-  },
-  {
     id: 'paper-parfit-1971', paper: 'parfit-1971', title: '읽은 논문 · Parfit (1971), Personal Identity', concept: '논문 자아 동일성 연속성 Parfit',
     body: `## 읽은 범위
 연구 기록에는 원본 PDF를 열어 앞부분을 확인한 것으로 적혀 있다. 개인 동일성이 언제나 결정적인 답을 가져야 하는지와, 살아남는 데 중요한 관계가 무엇인지를 구분하는 대목을 읽기 접점으로 삼았다.
@@ -111,8 +99,20 @@ Kripke의 고정점 논의는 자기 적용이 곧바로 끝없는 규칙 추가
 연구 기록에는 출판사 PDF의 앞부분과 일부 추출 구간만 확인한 것으로 적혀 있다. 전체 이론을 읽었다고 주장할 수 없는 상태다.
 ## P&K에서의 역할
 ‘관점에 따라 다르다’는 말이 곧 ‘마음대로 정한다’는 뜻인지 다시 묻게 하는 잠정적 비교 자료다. 특정 장의 논증을 P&K의 근거로 쓰는 일은 아직 보류한다. 이 글은 책 전문이 아니라 P&K의 제한된 읽기 기록이다.`
-  }
-  ,{
+  },
+  {
+    id: 'g222-p1-rival-semantics', source_id: '3f4ef561-cf92-814f-9535-f0b4e364352d', revision: '2026-10-09T21:40:11.129Z',
+    title: 'G2.22-P1 · Kripke·Yablo·AGM 경쟁 설계 법정', concept: 'G2.22 Kripke Yablo AGM 진리 의미론 역설 믿음 수정 반례',
+    body: `## 무엇을 비교했나
+연구진은 Kripke(1975)의 부분적 진리 의미론, Yablo(1993)의 무한 문장열 역설, Alchourrón·Gärdenfors·Makinson(1985)의 믿음 철회·수정 연산을 G2.22 실험 설계의 경쟁 설명으로 대조했다. 이는 세 이론이 동일한 결론을 지지한다는 뜻이 아니다.
+## 서로 다른 반례
+Kripke의 고정점 논의는 자기 적용이 곧바로 끝없는 규칙 추가를 강제한다는 주장을 공격한다. Yablo의 역설은 직접 자기지시를 제거해도 고전적 무한 문장열에서는 문제가 남을 수 있음을 보여주지만, 유한 절단을 같은 것으로 취급할 수 없다. AGM은 충돌 뒤 가정의 철회와 수정이 가능한 대안을 제시한다.
+## 앞으로 검증할 것
+고전적 이가 의미론, 부분적 진리, 무한·유한 문장 의존성, 믿음 수정 연산, 이력 의존성을 독립적으로 바꾸어 보아야 한다. G2.22는 현재 경쟁 설계 감사 단계이며 실제 시뮬레이션은 수행되지 않았다.
+## 해석과 공개의 경계
+이는 연구진이 작성한 공개용 파생 요약이다. 박성준의 원문, 사적인 대화, 승인되지 않은 해석 적합성 판단, 논문 PDF 원문을 포함하지 않는다. 개별 논문의 모든 증명을 완전 검증한 보고서가 아니며 박성준의 철학이 세 이론 중 어느 하나와 일치한다고 주장하지 않는다.`
+  },
+  {
     id:'g223-jurisdiction',source_id:'3f5ef561cf92813baffad6ac3d7d39f9',revision:'2026-10-10T08:30:00Z',
     title:'G2.23 실험 A · 자기 적용 가능성과 진리값 구분',concept:'G2.23 자기 적용 적용 여부 관할 중간 상태 미정 판단',
     body:`## 질문
@@ -249,7 +249,7 @@ const records = entries.map(entry => {
     title: entry.title, concept: entry.concept, provenance: 'ACTIVE DERIVATIVE', body: entry.body,
     content_hash: crypto.createHash('sha256').update(entry.body, 'utf8').digest('hex'),
     imported_at: '2026-10-10',
-    publication_approved_by: entry.id.startsWith('g224-') || entry.id.startsWith('paper-g224-') ? 'project owner · 2026-10-10 requested selective high-quality public research expansion' : entry.id === 'g222-p1-rival-semantics' ? 'project owner · 2026-10-10 instruction for selective P1 research-summary publication' : 'project owner · 2026-10-10 research-record category approval',
+    publication_approved_by: entry.id.startsWith('g224-') || entry.id.startsWith('paper-g224-') ? 'project owner · 2026-10-10 requested selective high-quality public research expansion' : entry.id.startsWith('g223-') ? 'project owner · 2026-10-10 instruction to expand public research materials selectively' : entry.id === 'g222-p1-rival-semantics' ? 'project owner · 2026-10-10 instruction for selective P1 research-summary publication' : 'project owner · 2026-10-10 research-record category approval',
     publication_approved_at: '2026-10-10',
     ...(entry.paper ? {bibliography: bibliography[entry.paper]} : {})
   };
