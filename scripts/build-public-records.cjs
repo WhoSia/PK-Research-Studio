@@ -227,23 +227,29 @@ Shalizi, Cosma R. & Thomas, Andrew C. (2011). Homophily and Contagion Are Generi
 ];
 
 const literatureId = '3f4ef561-cf92-814e-94f2-f3e446376382';
+const g224LiteratureId = '3f5ef561cf92817681baf4cfb87a7b05';
 const bibliography = {
   'parfit-1971': {author:'Parfit',year:1971,exact_title:'Personal Identity',doi:null,version:'원본 PDF 확인 · 판본 세부 정보 확인 전',read_status:'원본 PDF 앞부분 확인',original_claim:'개인 동일성의 결정 가능성과 생존에서 중요한 관계를 구분한다.',our_interpretation:'P&K의 자아 동일성 질문에서 수적 동일성과 심리적 연속성을 분리해 비교한다.',limitations:'전체 논문 독해를 이 기록만으로 주장하지 않는다.',park_relation:'박성준의 발언이나 동의로 귀속하지 않는다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'},
   'khalidi-2010': {author:'Khalidi',year:2010,exact_title:'Interactive Kinds',doi:null,version:'원본 PDF 확인 · 판본 세부 정보 확인 전',read_status:'초록·도입부 확인',original_claim:'개념적 분류와 분류 대상 사이의 되먹임을 논의한다.',our_interpretation:'분류의 변화와 세계의 변화를 구분하는 비교축으로 사용한다.',limitations:'전체 논문 독해 또는 모든 분류의 세계 창조를 주장하지 않는다.',park_relation:'박성준의 원문이 아니라 외부 비교 자료다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'},
   'doyle-1979': {author:'Doyle',year:1979,exact_title:'A Truth Maintenance System',doi:null,version:'원본 PDF 확인 · 판본 세부 정보 확인 전',read_status:'원본 PDF의 가정·정당화·수정 논의 확인',original_claim:'가정과 정당화의 의존 관계를 관리하고 믿음을 수정하는 체계를 제시한다.',our_interpretation:'모순 뒤 보조 규칙만 계속 더해야 한다는 예상의 반대 기준으로 사용한다.',limitations:'이 체계를 박성준의 경험적 자아 모형으로 간주하지 않는다.',park_relation:'박성준의 발언이나 승인으로 귀속하지 않는다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'},
-  'massimi-2022': {author:'Massimi',year:2022,exact_title:'Perspectival Realism',doi:null,version:'출판사 PDF 일부 확인 · 판본 세부 정보 확인 전',read_status:'앞부분·일부 추출 구간만 확인 · 전체 이론 독해 전',original_claim:'관점과 실재에 관한 논의를 전개한다. 정확한 장별 논증은 이 기록에서 주장하지 않는다.',our_interpretation:'관점 의존성을 자의성과 곧바로 같게 두지 않기 위한 잠정적 비교 자료다.',limitations:'전체 독해 전이므로 특정 장의 논증을 P&K의 근거로 삼지 않는다.',park_relation:'박성준의 입장으로 귀속하지 않는다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'}
+  'massimi-2022': {author:'Massimi',year:2022,exact_title:'Perspectival Realism',doi:null,version:'출판사 PDF 일부 확인 · 판본 세부 정보 확인 전',read_status:'앞부분·일부 추출 구간만 확인 · 전체 이론 독해 전',original_claim:'관점과 실재에 관한 논의를 전개한다. 정확한 장별 논증은 이 기록에서 주장하지 않는다.',our_interpretation:'관점 의존성을 자의성과 곧바로 같게 두지 않기 위한 잠정적 비교 자료다.',limitations:'전체 독해 전이므로 특정 장의 논증을 P&K의 근거로 삼지 않는다.',park_relation:'박성준의 입장으로 귀속하지 않는다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'},
+  'g224-manski-1993': {author:'Charles F. Manski',year:1993,exact_title:'Identification of Endogenous Social Effects: The Reflection Problem',doi:'10.2307/2298123',version:'Review of Economic Studies 60(3), 531–542 · 서지정보 확인',read_status:'출판사 초록 및 서지정보 확인 · 전체 논증 미검증',original_claim:'관측된 집단 행동만으로 내생적 사회 효과를 식별하기 어려울 수 있으며 준거 집단에 관한 추가 가정이 중요하다.',our_interpretation:'두 사람의 유사성과 실제 상호 영향은 다른 가설이다.',limitations:'문헌 초록 중심 독해 · 모든 정리 재증명 아님 · 사람의 내적 경험 모델 아님',park_relation:'개인 발언이 아니라 경쟁 문헌',license:'서지와 연구진 자체 요약만 배포 · PDF 미배포'},
+  'g224-shalizi-thomas-2011': {author:'Cosma R. Shalizi; Andrew C. Thomas',year:2011,exact_title:'Homophily and Contagion Are Generically Confounded in Observational Social Network Studies',doi:'10.1177/0049124111404820',version:'Sociological Methods & Research 40(2), 211–239 · 서지정보 확인',read_status:'공개 초록·초반 자료 확인 · 전체 증명 미검증',original_claim:'관계 선택의 동질성, 사회적 전염, 공통 원인 사이의 혼동 때문에 관측 네트워크만으로 인과를 식별하기 어렵다.',our_interpretation:'상대와 함께 변했다는 기록에는 선택·공통 환경이라는 반례가 남는다.',limitations:'모든 경험에 적용되는 불가능 정리가 아니며 모든 정리를 독립 증명한 것이 아님',park_relation:'개인 발언이 아니라 경쟁 문헌',license:'서지와 연구진 자체 요약만 배포 · PDF 미배포'}
 };
 const records = entries.map(entry => {
-  const source_id = entry.paper ? `${literatureId}:${entry.paper}` : entry.id.startsWith('g223-') ? `${entry.source_id}:${entry.id}` : entry.source_id;
-  const pageId = entry.paper ? literatureId : entry.source_id;
-  const source_revision = entry.paper ? '2026-10-09T18:17:57.380Z' : entry.revision;
+  const g224Paper = Boolean(entry.paper && entry.id.startsWith('paper-g224-'));
+  const paperPageId = g224Paper ? g224LiteratureId : literatureId;
+  const source_id = entry.paper ? `${paperPageId}:${entry.paper}` : /^(g223-|g224-)/.test(entry.id) ? `${entry.source_id}:${entry.id}` : entry.source_id;
+  const pageId = entry.paper ? paperPageId : entry.source_id;
+  // The G2.24 revision is a release-specific curated snapshot identifier, not a simulated Notion edit timestamp.
+  const source_revision = entry.paper ? (g224Paper ? 'g224-literature-curation-v1-20261010' : '2026-10-09T18:17:57.380Z') : entry.revision;
   return {
     id: entry.id, source_kind: entry.paper ? 'notion-curated-paper-note' : 'notion-curated', source_id,
     source_revision, source_url: `https://app.notion.com/p/${pageId.replace(/-/g, '')}`,
     title: entry.title, concept: entry.concept, provenance: 'ACTIVE DERIVATIVE', body: entry.body,
     content_hash: crypto.createHash('sha256').update(entry.body, 'utf8').digest('hex'),
     imported_at: '2026-10-10',
-    publication_approved_by: entry.id === 'g222-p1-rival-semantics' ? 'project owner · 2026-10-10 instruction for selective P1 research-summary publication' : 'project owner · 2026-10-10 research-record category approval',
+    publication_approved_by: entry.id.startsWith('g224-') || entry.id.startsWith('paper-g224-') ? 'project owner · 2026-10-10 requested selective high-quality public research expansion' : entry.id === 'g222-p1-rival-semantics' ? 'project owner · 2026-10-10 instruction for selective P1 research-summary publication' : 'project owner · 2026-10-10 research-record category approval',
     publication_approved_at: '2026-10-10',
     ...(entry.paper ? {bibliography: bibliography[entry.paper]} : {})
   };
