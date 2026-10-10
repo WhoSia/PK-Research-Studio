@@ -156,7 +156,7 @@ const bibliography = {
   'massimi-2022': {author:'Massimi',year:2022,exact_title:'Perspectival Realism',doi:null,version:'출판사 PDF 일부 확인 · 판본 세부 정보 확인 전',read_status:'앞부분·일부 추출 구간만 확인 · 전체 이론 독해 전',original_claim:'관점과 실재에 관한 논의를 전개한다. 정확한 장별 논증은 이 기록에서 주장하지 않는다.',our_interpretation:'관점 의존성을 자의성과 곧바로 같게 두지 않기 위한 잠정적 비교 자료다.',limitations:'전체 독해 전이므로 특정 장의 논증을 P&K의 근거로 삼지 않는다.',park_relation:'박성준의 입장으로 귀속하지 않는다.',license:'공개 재배포 권한 확인 전 · PDF 미배포'}
 };
 const records = entries.map(entry => {
-  const source_id = entry.paper ? `${literatureId}:${entry.paper}` : entry.source_id;
+  const source_id = entry.paper ? `${literatureId}:${entry.paper}` : entry.id.startsWith('g223-') ? `${entry.source_id}:${entry.id}` : entry.source_id;
   const pageId = entry.paper ? literatureId : entry.source_id;
   const source_revision = entry.paper ? '2026-10-09T18:17:57.380Z' : entry.revision;
   return {
