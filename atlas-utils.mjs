@@ -5,6 +5,7 @@ export const RESEARCH_TRAILS=Object.freeze([
   Object.freeze({id:'perspective',label:'관점 · 사건',query:'관점'}),
   Object.freeze({id:'rule',label:'절대성 · 규칙',query:'절대'}),
   Object.freeze({id:'preseal',label:'G2.21',query:'G2.21'}),
+  Object.freeze({id:'other-minds',label:'G2.24 · 타자 인식',query:'G2.24'}),
 ]);
 export function atlasSearchText(record) {
   const b=record?.bibliography||{};

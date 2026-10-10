@@ -10,6 +10,7 @@ const allowed=new Map([
   ['/app.js','app.js'],['/config.js','config.js'],
   ['/workspace.js','workspace.js'],['/atlas-utils.mjs','atlas-utils.mjs'],
   ['/rival-model.mjs','rival-model.mjs'],
+  ['/g224-model.mjs','g224-model.mjs'],['/g224-frontier.mjs','g224-frontier.mjs'],
   ['/styles.css','styles.css'],['/workspace.css','workspace.css'],
   ['/content/public/records.json','content/public/records.json']
 ]);
