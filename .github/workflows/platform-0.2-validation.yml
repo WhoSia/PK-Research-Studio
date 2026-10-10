@@ -1,4 +1,4 @@
-name: Platform 0.2 read-only validation
+name: Platform 0.3 and G2.23 validation
 on:
   push:
     branches:
@@ -14,6 +14,8 @@ on:
       - 'workspace.js'
       - 'workspace.css'
       - 'index.html'
+      - 'app.js'
+      - 'research/g223/**'
       - '.github/workflows/platform-0.2-validation.yml'
   workflow_dispatch:
 permissions:
@@ -35,5 +37,7 @@ jobs:
         run: python3 research/g222-p2/independent_audit.py
       - name: Strong C6 independent Python bridge court
         run: python3 research/g222-p2/strong_bridge_independent.py
+      - name: G2.23 independent causal reference audit
+        run: python3 research/g223/independent_audit.py
       - name: Approved public records
         run: node scripts/validate-public-records.cjs
