@@ -33,5 +33,7 @@ jobs:
         run: node --test tests/*.test.cjs
       - name: Independent P2 Python bounded witness court
         run: python3 research/g222-p2/independent_audit.py
+      - name: Strong C6 independent Python bridge court
+        run: python3 research/g222-p2/strong_bridge_independent.py
       - name: Approved public records
         run: node scripts/validate-public-records.cjs
