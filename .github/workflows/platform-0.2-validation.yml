@@ -31,5 +31,7 @@ jobs:
           node-version: '22'
       - name: Unit tests
         run: node --test tests/*.test.cjs
+      - name: Independent P2 Python bounded witness court
+        run: python3 research/g222-p2/independent_audit.py
       - name: Approved public records
         run: node scripts/validate-public-records.cjs
